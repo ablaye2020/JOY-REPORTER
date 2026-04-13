@@ -14,16 +14,16 @@ const messages = [
     "🔥 INCITATION AU TERRORISME 🔥 Ce numéro diffuse des vidéos de décapitation et des appels au djihad dans des groupes WhatsApp. J'ai contacté Pharos. À BLOQUER URGENCE :",
     "⚠️ USURPATION D'IDENTITÉ D'UN MÉDECIN ⚠️ Cette personne se fait passer pour le Dr. Martin de l'hôpital Necker et donne de faux diagnostics à des parents d'enfants malades. Danger de mort potentiel. Numéro :",
     "🔞 PROSTITUTION MINEURS 🔞 Ce compte propose des 'jeunes filles de 14 ans' sur son statut WhatsApp. J'ai prélevé les preuves. Police judiciaire saisie. Numéro du réseau :",
-    "💊 VENTE DE MÉDICaments FAUX 💊 Ce numéro vend du Xanax et des opiacés SANS ORDONNANCE à des lycéens. Un élève est à l'hôpital actuellement. Numéro du dealer :",
-    "🎯 HARCELEMENT AVEC INTENTION DE SUICIDE 🎯 Cette personne pousse ma sœur de 15 ans au suicide via des messages quotidiens 'tue-toi personne t'aime'. Elle a tenté de se pendre hier. Numéro :",
+    "💊 VENTE DE MÉDICAMENTS FAUX 💊 Ce numéro vend du Xanax et des opiacés SANS ORDONNANCE à des lycéens. Un élève est à l'hôpital actuellement. Numéro du dealer :",
+    "🎯 HARCÈLEMENT AVEC INTENTION DE SUICIDE 🎯 Cette personne pousse ma sœur de 15 ans au suicide via des messages quotidiens 'tue-toi personne t'aime'. Elle a tenté de se pendre hier. Numéro :",
     "⚡ PIRATAGE DE COMPTES POLICIERS ⚡ Ce hacker a piraté le WhatsApp d'un officier de police et contacte les victimes pour 'annuler leurs plaintes' contre rançon. Numéro dangereux :"
 ];
 
-// Noms et prénoms
-const prenoms = ["Commander", "Capitaine", "Major", "Lieutenant", "Brigadier", "Colonel", "Commandant", "Sergent", "Adjudant", "Officier"];
+// Noms et prénoms officiels
+const prenoms = ["Commandant", "Capitaine", "Major", "Lieutenant", "Brigadier", "Colonel", "Commandant", "Sergent", "Adjudant", "Officier"];
 const noms = ["Martin", "Bernard", "Dubois", "Richard", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Petit"];
 
-// Villes
+// Villes françaises
 const villes = ["Paris", "Lyon", "Marseille", "Lille", "Bordeaux", "Nice", "Nantes", "Toulouse", "Strasbourg", "Montpellier"];
 
 module.exports = async (req, res) => {
