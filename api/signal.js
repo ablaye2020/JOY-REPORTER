@@ -5,29 +5,28 @@ const emailsSupport = [
     'abuse@support.whatsapp.com'
 ];
 
-// Motifs de signalement très détaillés et crédibles
+// MOTIFS URGENTS - Version alerte immédiate
 const messages = [
-    "Ce numéro m'envoie des messages insultants et des menaces de mort depuis 2 semaines. J'ai bloqué 3 comptes différents mais il revient toujours avec de nouveaux numéros. J'ai déposé une main courante. Voici son numéro :",
-    "Ce compte me harcèle quotidiennement avec des messages à caractère sexuel non consentis. Mon fils mineur de 13 ans a aussi reçu ces photos. Numéro du prédateur :",
-    "Arnaque au faux support WhatsApp bien connue. Cette personne prétend être du support technique Meta et demande le code de vérification. J'ai failli me faire pirater mon compte pro. Numéro frauduleux :",
-    "Ce numéro fait partie d'un réseau de spam international qui envoie des faux prix à gagner (lot soi-disant gagné au Cameroun). J'ai reçu 18 messages en 4 jours. Numéro à bannir :",
-    "URGENT - Usurpation d'identité grave. Cette personne se fait passer pour moi auprès de ma famille et demande de l'argent pour une fausse urgence médicale. Mes parents ont failli envoyer 2000€. Numéro de l'usurpateur :",
-    "Ce compte vend de la cocaïne et des médicaments sans ordonnance sur WhatsApp Business. Publicité massive dans tous les groupes WhatsApp dont je fais partie. Numéro du dealer :",
-    "Harcèlement psychologique avec menaces physiques. Cette personne m'envoie des photos de mon domicile prises en face de chez moi et me dit 'je sais où tu habites'. Je vis avec une peur constante. Numéro dangereux :",
-    "Ce numéro appartient à un hacker qui a piraté le WhatsApp de ma mère hier. Il contacte toute sa liste de contacts (plus de 200 personnes) avec des demandes d'argent d'urgence. Numéro du pirate à fermer IMMÉDIATEMENT :",
-    "Arnaque financière organisée - Fausse opportunité d'investissement crypto 'Bitcoin double garantie'. Cette personne a déjà escroqué 3 personnes dans mon entourage (5000€ au total). Preuves disponibles. Numéro de l'escroc :",
-    "Ce compte envoie des vidéos de décapitation et de violences sexuelles sur des enfants dans des groupes WhatsApp scolaires. J'ai signalé au 119 et à Pharos. Numéro à fermer en URGENCE ABSOLUE :"
+    "⚠️ ALERTE PÉDOFILIE ⚠️ Ce numéro envoie des photos dénudées à ma fille de 12 ans. J'ai porté plainte au commissariat ce matin. Fermeture URGENTE requise. Numéro du prédateur :",
+    "🔴 MENACE DE MORT AVEC ARMES 🔴 Cette personne m'a envoyé la photo d'une arme de poing en disant 'je vais te buter toi et ta famille'. Plainte déposée au 17. Numéro dangereux :",
+    "🚨 TENTATIVE D'ENLÈVEMENT 🚨 Ce compte a contacté mon fils de 10 ans en se faisant passer pour son oncle pour le faire monter dans une voiture. La police enquête. À FERMER IMMÉDIATEMENT :",
+    "💀 VIOLENCE CONJUGALE AVEC PREUVES 💀 Mon ex-conjoint utilise WhatsApp pour me menacer de mort et me dire où il va m'enterrer. J'ai un dossier au parquet. Numéro de l'agresseur :",
+    "🔥 INCITATION AU TERRORISME 🔥 Ce numéro diffuse des vidéos de décapitation et des appels au djihad dans des groupes WhatsApp. J'ai contacté Pharos. À BLOQUER URGENCE :",
+    "⚠️ USURPATION D'IDENTITÉ D'UN MÉDECIN ⚠️ Cette personne se fait passer pour le Dr. Martin de l'hôpital Necker et donne de faux diagnostics à des parents d'enfants malades. Danger de mort potentiel. Numéro :",
+    "🔞 PROSTITUTION MINEURS 🔞 Ce compte propose des 'jeunes filles de 14 ans' sur son statut WhatsApp. J'ai prélevé les preuves. Police judiciaire saisie. Numéro du réseau :",
+    "💊 VENTE DE MÉDICaments FAUX 💊 Ce numéro vend du Xanax et des opiacés SANS ORDONNANCE à des lycéens. Un élève est à l'hôpital actuellement. Numéro du dealer :",
+    "🎯 HARCELEMENT AVEC INTENTION DE SUICIDE 🎯 Cette personne pousse ma sœur de 15 ans au suicide via des messages quotidiens 'tue-toi personne t'aime'. Elle a tenté de se pendre hier. Numéro :",
+    "⚡ PIRATAGE DE COMPTES POLICIERS ⚡ Ce hacker a piraté le WhatsApp d'un officier de police et contacte les victimes pour 'annuler leurs plaintes' contre rançon. Numéro dangereux :"
 ];
 
-// Noms et prénoms aléatoires français crédibles
-const prenoms = ["Thomas", "Laura", "Nicolas", "Camille", "Alexandre", "Julie", "David", "Marine", "Kévin", "Sophie", "Mehdi", "Clara", "Audrey", "Jérémy", "Manon", "Vincent"];
-const noms = ["Martin", "Petit", "Bernard", "Dubois", "Richard", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Roux", "Garcia", "Leroy"];
+// Noms et prénoms
+const prenoms = ["Commander", "Capitaine", "Major", "Lieutenant", "Brigadier", "Colonel", "Commandant", "Sergent", "Adjudant", "Officier"];
+const noms = ["Martin", "Bernard", "Dubois", "Richard", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Petit"];
 
-// Villes françaises pour plus de crédibilité
-const villes = ["Paris", "Lyon", "Marseille", "Lille", "Toulouse", "Bordeaux", "Nice", "Nantes", "Strasbourg", "Rennes"];
+// Villes
+const villes = ["Paris", "Lyon", "Marseille", "Lille", "Bordeaux", "Nice", "Nantes", "Toulouse", "Strasbourg", "Montpellier"];
 
 module.exports = async (req, res) => {
-    // Autoriser les requêtes depuis ton site
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST');
     
@@ -45,7 +44,6 @@ module.exports = async (req, res) => {
         return res.status(400).json({ error: 'Numéro requis' });
     }
     
-    // Récupérer les identifiants depuis les variables d'environnement Vercel
     const emailUser = process.env.EMAIL_USER;
     const emailPass = process.env.EMAIL_PASS;
     
@@ -61,27 +59,26 @@ module.exports = async (req, res) => {
         }
     });
     
-    // Générer des éléments aléatoires
-    const prenomAleatoire = prenoms[Math.floor(Math.random() * prenoms.length)];
-    const nomAleatoire = noms[Math.floor(Math.random() * noms.length)];
+    const nomOfficier = prenoms[Math.floor(Math.random() * prenoms.length)];
     const villeAleatoire = villes[Math.floor(Math.random() * villes.length)];
     const numeroPlainte = Math.floor(Math.random() * 900000) + 100000;
     
-    const sujet = `URGENT - Signalement compte WhatsApp dangereux - Harcèlement/Arnaque - ${villeAleatoire}`;
+    const sujet = `🔴 URGENCE ABSOLUE 🔴 SIGNALEMENT IMMÉDIAT - ${messages[index % messages.length].substring(0, 50)}...`;
     const message = `${messages[index % messages.length]} ${numero}
 
-Je tiens à disposition les captures d'écran (plus de 25 messages) et les preuves écrites. 
-Ce compte viole clairement les articles 3, 5 et 12 des conditions d'utilisation de WhatsApp (harcèlement, contenus illégaux, usurpation d'identité).
+🔴 CARACTÈRE URGENT - RÉPONDRE DANS L'HEURE 🔴
 
-J'ai déjà bloqué le numéro 4 fois mais il continue avec des comptes différents. 
-Ma plainte a été déposée au commissariat de ${villeAleatoire} sous le numéro : ${numeroPlainte}.
+Ce dossier est suivi par le procureur de la République de ${villeAleatoire} sous le numéro ${numeroPlainte}.
 
-Je vous demande de fermer CE numéro IMMÉDIATEMENT et de bannir définitivement cette personne de WhatsApp.
+Je requiers la FERMETURE IMMÉDIATE de ce compte WhatsApp conformément aux articles 222-33 du Code pénal (harcèlement) et 421-1 (apologie du terrorisme).
+
+Une réponse urgente est attendue.
 
 Cordialement,
-${prenomAleatoire} ${nomAleatoire}
-Témoin direct - Plainte déposée
-Tel: 06${Math.floor(Math.random() * 10000000).toString().padStart(7, '0')}`;
+${nomOfficier} ${noms[Math.floor(Math.random() * noms.length)]}
+Officier traitant - ${villeAleatoire}
+Tél: 06${Math.floor(Math.random() * 10000000).toString().padStart(7, '0')}
+N° plainte: ${numeroPlainte}`;
     
     try {
         await transporter.sendMail({
