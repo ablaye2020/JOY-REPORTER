@@ -5,7 +5,6 @@ const emailsSupport = [
     'abuse@support.whatsapp.com'
 ];
 
-// MOTIFS URGENTS - Version alerte immédiate
 const messages = [
     "⚠️ ALERTE PÉDOFILIE ⚠️ Ce numéro envoie des photos dénudées à ma fille de 12 ans. J'ai porté plainte au commissariat ce matin. Fermeture URGENTE requise. Numéro du prédateur :",
     "🔴 MENACE DE MORT AVEC ARMES 🔴 Cette personne m'a envoyé la photo d'une arme de poing en disant 'je vais te buter toi et ta famille'. Plainte déposée au 17. Numéro dangereux :",
@@ -19,11 +18,8 @@ const messages = [
     "⚡ PIRATAGE DE COMPTES POLICIERS ⚡ Ce hacker a piraté le WhatsApp d'un officier de police et contacte les victimes pour 'annuler leurs plaintes' contre rançon. Numéro dangereux :"
 ];
 
-// Noms et prénoms officiels
 const prenoms = ["Commandant", "Capitaine", "Major", "Lieutenant", "Brigadier", "Colonel", "Commandant", "Sergent", "Adjudant", "Officier"];
 const noms = ["Martin", "Bernard", "Dubois", "Richard", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Petit"];
-
-// Villes françaises
 const villes = ["Paris", "Lyon", "Marseille", "Lille", "Bordeaux", "Nice", "Nantes", "Toulouse", "Strasbourg", "Montpellier"];
 
 module.exports = async (req, res) => {
