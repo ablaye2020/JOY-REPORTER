@@ -1,32 +1,113 @@
-async function lancerSignalement() {
-    const numero = document.getElementById('numero').value;
-    if(!numero || numero.length < 10) {
-        alert("Numéro invalide !");
-        return;
-    }
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Reporter - Joyboy</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #ff0000;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid #ff0000;
+            text-align: center;
+            width: 400px;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background: #222;
+            border: 1px solid #ff0000;
+            color: white;
+            font-size: 16px;
+        }
+        button {
+            background: #ff0000;
+            color: black;
+            border: none;
+            padding: 12px 24px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #cc0000;
+        }
+        #status {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #00ff00;
+        }
+        .quote {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚡ WHATSAPP MASS REPORTER ⚡</h1>
+        <p>Numéro à signaler :</p>
+        <input type="text" id="numero" placeholder="+33XXXXXXXXX">
+        <button onclick="lancerSignalement()">LANCER 50 SIGNALEMENTS</button>
+        <div id="status">Prêt</div>
+        <div class="quote">"Le respect ne se demande pas" - Joyboy</div>
+    </div>
 
-    document.getElementById('status').innerHTML = "⚡ Envoi des 50 signalements en parallèle...";
-    document.querySelector('button').disabled = true;
+    <script>
+        async function lancerSignalement() {
+            const numero = document.getElementById('numero').value;
+            if(!numero || numero.length < 10) {
+                alert("Numéro invalide !");
+                return;
+            }
 
-    // Créer 50 promesses (envois simultanés)
-    const promesses = [];
-    for(let i = 1; i <= 50; i++) {
-        promesses.push(
-            fetch('/api/signal', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ numero: numero, index: i })
-            })
-        );
-    }
+            const statusDiv = document.getElementById('status');
+            const bouton = document.querySelector('button');
+            
+            statusDiv.innerHTML = "⚡ Envoi des 50 signalements en parallèle...";
+            bouton.disabled = true;
 
-    // Attendre que les 50 soient terminés
-    const resultats = await Promise.all(promesses);
-    
-    // Compter les réussites (status 200)
-    const reussis = resultats.filter(r => r.ok).length;
-    const echoues = 50 - reussis;
-    
-    document.getElementById('status').innerHTML = `✅ ${reussis}/50 signalements envoyés ! (${echoues} échecs)`;
-    document.querySelector('button').disabled = false;
-}
+            let reussis = 0;
+            let echoues = 0;
+
+            // Envoyer 50 requêtes en parallèle
+            const promesses = [];
+            for(let i = 1; i <= 50; i++) {
+                promesses.push(
+                    fetch('/api/signal', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ numero: numero, index: i })
+                    })
+                    .then(res => res.ok ? 'ok' : 'fail')
+                    .catch(() => 'fail')
+                );
+            }
+
+            // Attendre tous les résultats
+            const resultats = await Promise.all(promesses);
+            
+            reussis = resultats.filter(r => r === 'ok').length;
+            echoues = 50 - reussis;
+            
+            statusDiv.innerHTML = `✅ ${reussis}/50 signalements envoyés ! (${echoues} échecs)`;
+            bouton.disabled = false;
+            
+            // Rejouer un son mentalement : c'est fait !
+        }
+    </script>
+</body>
+</html>
