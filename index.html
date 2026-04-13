@@ -5,7 +5,7 @@ async function lancerSignalement() {
         return;
     }
 
-    document.getElementById('status').innerHTML = "⏳ Envoi des 50 signalements en parallèle...";
+    document.getElementById('status').innerHTML = "⚡ Envoi des 50 signalements en parallèle...";
     document.querySelector('button').disabled = true;
 
     // Créer 50 promesses (envois simultanés)
@@ -22,8 +22,11 @@ async function lancerSignalement() {
 
     // Attendre que les 50 soient terminés
     const resultats = await Promise.all(promesses);
-    const reussis = resultats.filter(r => r.ok).length;
     
-    document.getElementById('status').innerHTML = `✅ ${reussis}/50 signalements envoyés en parallèle !`;
+    // Compter les réussites (status 200)
+    const reussis = resultats.filter(r => r.ok).length;
+    const echoues = 50 - reussis;
+    
+    document.getElementById('status').innerHTML = `✅ ${reussis}/50 signalements envoyés ! (${echoues} échecs)`;
     document.querySelector('button').disabled = false;
 }
