@@ -30,25 +30,19 @@
             box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
             text-align: center;
             width: 500px;
-            backdrop-filter: blur(5px);
         }
 
         .king-name {
             font-size: 28px;
             font-weight: bold;
             text-shadow: 0 0 15px #ff0000;
-            letter-spacing: 3px;
             margin-bottom: 10px;
-            color: #ff0000;
         }
 
         .subtitle {
             color: #ff4444;
             font-size: 12px;
             margin-bottom: 20px;
-            border-bottom: 1px solid #ff0000;
-            display: inline-block;
-            padding-bottom: 5px;
         }
 
         .whatsapp-link {
@@ -59,70 +53,66 @@
             border-radius: 30px;
             display: inline-block;
             margin: 15px 0;
-            font-weight: bold;
-            transition: all 0.3s ease;
             font-size: 14px;
         }
 
-        .whatsapp-link:hover {
-            background: #128C7E;
-            transform: scale(1.02);
+        .input-group {
+            margin: 15px 0;
+            text-align: left;
         }
 
-        .abonnement-requis {
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff0000;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 15px 0;
-            font-size: 12px;
+        .input-group label {
+            font-size: 11px;
             color: #ff8888;
+            display: block;
+            margin-bottom: 5px;
         }
 
         input {
             width: 100%;
             padding: 14px;
-            margin: 15px 0;
             background: #1a1a1a;
             border: 1px solid #ff0000;
             color: white;
             font-size: 16px;
             border-radius: 8px;
-            font-family: monospace;
             text-align: center;
         }
 
-        input:focus {
-            outline: none;
-            border-color: #ff4444;
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        .double-boutons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
         }
 
-        button {
+        .btn-signal {
             background: #ff0000;
             color: black;
             border: none;
             padding: 14px;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
-            font-size: 16px;
+            flex: 1;
             border-radius: 8px;
-            transition: all 0.3s ease;
-            font-family: 'Courier New', monospace;
-            margin: 10px 0;
         }
 
-        button:hover {
-            background: #cc0000;
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        .btn-deban {
+            background: #00aa00;
+            color: black;
+            border: none;
+            padding: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            flex: 1;
+            border-radius: 8px;
         }
+
+        .btn-signal:hover { background: #cc0000; }
+        .btn-deban:hover { background: #008800; }
 
         button:disabled {
             background: #440000;
             cursor: not-allowed;
-            transform: none;
         }
 
         #status {
@@ -132,15 +122,12 @@
             border-radius: 8px;
             font-size: 13px;
             color: #00ff00;
-            font-family: monospace;
         }
 
         .joyboy {
             margin-top: 20px;
             font-size: 11px;
             color: #ff6666;
-            text-align: center;
-            letter-spacing: 1px;
             border-top: 1px solid #ff0000;
             padding-top: 15px;
         }
@@ -150,6 +137,12 @@
             margin-top: 10px;
             color: #440000;
         }
+
+        .compteur {
+            font-size: 12px;
+            color: #ffaa00;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
@@ -157,75 +150,101 @@
         <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
         <div class="subtitle">WHATSAPP MASS REPORTER</div>
         
-        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank">
+        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank" id="whatsappLink">
             📱 REJOINDRE LA CHAÎNE WHATSAPP
         </a>
         
-        <div class="abonnement-requis">
-            ⚠️ VOUS DEVEZ ÊTRE ABONNÉ À LA CHAÎNE POUR SIGNALER ⚠️
+        <div class="input-group">
+            <label>📱 TON NUMÉRO WHATSAPP (pour vérifier l'abonnement)</label>
+            <input type="text" id="numAbonne" placeholder="+33XXXXXXXXX">
         </div>
         
-        <input type="text" id="numero" placeholder="📞 Numéro à signaler (+33XXXXXXXXX)">
+        <div class="input-group">
+            <label>📞 NUMÉRO À SIGNALER / DÉBAN</label>
+            <input type="text" id="numero" placeholder="+33XXXXXXXXX">
+        </div>
         
-        <button onclick="verifierEtLancer()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
+        <div class="double-boutons">
+            <button class="btn-signal" onclick="verifierEtLancer('signal')">🔴 SIGNALER 50x</button>
+            <button class="btn-deban" onclick="verifierEtLancer('deban')">🟢 DÉBAN 50x</button>
+        </div>
         
         <div id="status">⚡ PRÊT ⚡</div>
+        <div id="compteur" class="compteur"></div>
         
         <div class="joyboy">BY JOYBOY</div>
         <div class="footer-text">⚡ Système de signalement rapide - Le respect ne se demande pas ⚡</div>
     </div>
 
     <script>
-        // 🔊 SON AU PREMIER CLIC
-let sonJoue = false;
-const son = new Audio('ma_musique.mp3.m4a');  // ← REMPLACE PAR LE NOM DE TON FICHIER
-
-function jouerSon() {
-    if(sonJoue) return;
-    sonJoue = true;
-    son.play().catch(e => console.log("Son bloqué"));
-}
+        // 🔊 SON AVEC TON FICHIER ma_musique.mp3.m4a
+        let sonJoue = false;
+        const son = new Audio('ma_musique.mp3.m4a');
         
-        // VÉRIFICATION ABONNEMENT WHATSAPP
-        let aVisiteWhatsApp = false;
-        const LIEN_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 REMPLACE PAR TON LIEN
-        
-        window.addEventListener('focus', function() {
-            if(document.hidden === false) {
-                aVisiteWhatsApp = true;
-                document.getElementById('status').innerHTML = "✅ Abonnement vérifié ! Vous pouvez signaler ✅";
-                document.getElementById('status').style.color = "#00ff00";
-            }
-        });
-        
-        function verifierEtLancer() {
-            // JOUER LE SON AU PREMIER CLIC
-            jouerSon();
-            
-            if(!aVisiteWhatsApp) {
-                window.open(LIEN_WHATSAPP, '_blank');
-                document.getElementById('status').innerHTML = "📱 REJOIGNEZ LA CHAÎNE PUIS REVENEZ ICI 📱";
-                document.getElementById('status').style.color = "#ffaa00";
-                return;
-            }
-            
-            lancerSignalement();
+        function jouerSon() {
+            if(sonJoue) return;
+            sonJoue = true;
+            son.play().catch(e => console.log("Son bloqué par navigateur"));
         }
         
-        async function lancerSignalement() {
+        let compteARebours = false;
+        let actionEnCours = null;
+        
+        function verifierEtLancer(action) {
+            // JOUER LE SON
+            jouerSon();
+            
+            const numAbonne = document.getElementById('numAbonne').value.trim();
             const numero = document.getElementById('numero').value.trim();
             
-            if(!numero || numero.length < 10) {
-                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
+            if(!numAbonne || numAbonne.length < 10) {
+                alert("❌ Entre ton numéro WhatsApp pour vérifier l'abonnement !");
                 return;
             }
-
-            const statusDiv = document.getElementById('status');
-            const bouton = document.querySelector('button');
             
-            statusDiv.innerHTML = "⚡ ENVOI DES 50 SIGNALEMENTS EN PARALLÈLE... ⚡";
+            if(!numero || numero.length < 10) {
+                alert("❌ Numéro à signaler/déban invalide !");
+                return;
+            }
+            
+            if(compteARebours) {
+                alert("⏳ Un envoi est déjà en cours !");
+                return;
+            }
+            
+            actionEnCours = action;
+            const boutons = document.querySelectorAll('.btn-signal, .btn-deban');
+            boutons.forEach(b => b.disabled = true);
+            
+            document.getElementById('status').innerHTML = "🔍 VÉRIFICATION DE L'ABONNEMENT... 🔍";
+            document.getElementById('status').style.color = "#ffaa00";
+            
+            setTimeout(() => {
+                document.getElementById('status').innerHTML = "✅ ABONNEMENT VÉRIFIÉ ! DÉMARRAGE DANS 30 SECONDES... ✅";
+                document.getElementById('status').style.color = "#00ff00";
+                
+                let tempsRestant = 30;
+                const compteurDiv = document.getElementById('compteur');
+                
+                const interval = setInterval(() => {
+                    tempsRestant--;
+                    compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
+                    
+                    if(tempsRestant <= 0) {
+                        clearInterval(interval);
+                        compteurDiv.innerHTML = "";
+                        lancerSignalement(actionEnCours, numero);
+                    }
+                }, 1000);
+            }, 2000);
+        }
+        
+        async function lancerSignalement(action, numero) {
+            const statusDiv = document.getElementById('status');
+            const boutons = document.querySelectorAll('.btn-signal, .btn-deban');
+            
+            statusDiv.innerHTML = `⚡ ENVOI 50x ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} EN PARALLÈLE... ⚡`;
             statusDiv.style.color = "#ffaa00";
-            bouton.disabled = true;
 
             const promesses = [];
             for(let i = 1; i <= 50; i++) {
@@ -233,7 +252,7 @@ function jouerSon() {
                     fetch('/api/signal', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ numero: numero, index: i })
+                        body: JSON.stringify({ numero: numero, index: i, action: action })
                     })
                     .then(res => res.ok ? 'ok' : 'fail')
                     .catch(() => 'fail')
@@ -243,15 +262,11 @@ function jouerSon() {
             const resultats = await Promise.all(promesses);
             const reussis = resultats.filter(r => r === 'ok').length;
             
-            if(reussis === 50) {
-                statusDiv.innerHTML = `✅ ${reussis}/50 SIGNALEMENTS ENVOYÉS ! ✅`;
-                statusDiv.style.color = "#00ff00";
-            } else {
-                statusDiv.innerHTML = `⚠️ ${reussis}/50 RÉUSSIS - ${50-reussis} ÉCHECS ⚠️`;
-                statusDiv.style.color = "#ffaa00";
-            }
-            
-            bouton.disabled = false;
+            statusDiv.innerHTML = `✅ ${reussis}/50 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} ENVOYÉS ! ✅`;
+            statusDiv.style.color = "#00ff00";
+            boutons.forEach(b => b.disabled = false);
+            compteARebours = false;
+            document.getElementById('compteur').innerHTML = "";
         }
     </script>
 </body>
