@@ -45,16 +45,45 @@
         .subtitle {
             color: #ff4444;
             font-size: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #ff0000;
             display: inline-block;
             padding-bottom: 5px;
         }
 
+        /* Style du lien WhatsApp */
+        .whatsapp-link {
+            background: #075E54;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .whatsapp-link:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+
+        .abonnement-requis {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #ff8888;
+        }
+
         input {
             width: 100%;
             padding: 14px;
-            margin: 20px 0;
+            margin: 15px 0;
             background: #1a1a1a;
             border: 1px solid #ff0000;
             color: white;
@@ -108,13 +137,19 @@
         }
 
         .joyboy {
-            margin-top: 25px;
+            margin-top: 20px;
             font-size: 11px;
             color: #ff6666;
             text-align: center;
             letter-spacing: 1px;
             border-top: 1px solid #ff0000;
             padding-top: 15px;
+        }
+
+        .footer-text {
+            font-size: 9px;
+            margin-top: 10px;
+            color: #440000;
         }
     </style>
 </head>
@@ -123,30 +158,56 @@
         <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
         <div class="subtitle">WHATSAPP MASS REPORTER</div>
         
+        <!-- LIEN WHATSAPP CHAÎNE -->
+        <a href="https://whatsapp.com/channel/..." class="whatsapp-link" target="_blank">
+            📱 REJOINDRE LA CHAÎNE WHATSAPP
+        </a>
+        
+        <div class="abonnement-requis">
+            ⚠️ VOUS DEVEZ ÊTRE ABONNÉ À LA CHAÎNE POUR SIGNALER ⚠️
+        </div>
+        
         <input type="text" id="numero" placeholder="📞 Numéro à signaler (+33XXXXXXXXX)">
         
-        <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
+        <button onclick="verifierEtLancer()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
         
         <div id="status">⚡ PRÊT ⚡</div>
         
         <div class="joyboy">BY JOYBOY</div>
+        <div class="footer-text">⚡ Système de signalement rapide - Le respect ne se demande pas ⚡</div>
     </div>
 
     <script>
-        // REMPLACE "mon-son.mp3" par le NOM de ton fichier
-        const son = new Audio('ma_musique.mp3.m4a');
-        let sonJoue = false;
+        // Variable pour vérifier si l'utilisateur a cliqué sur le lien WhatsApp
+        let aVisiteWhatsApp = false;
         
-        function jouerSon() {
-            if(sonJoue) return;
-            sonJoue = true;
-            son.play().catch(e => console.log("Son bloqué par navigateur"));
-        }
-
-        async function lancerSignalement() {
-            // JOUER LE SON AU PREMIER CLIC
-            jouerSon();
+        // Remplacer par le LIEN DE TA CHAÎNE WHATSAPP
+        const LIEN_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 REMPLACE ICI
+        
+        // Détecter quand l'utilisateur revient après avoir cliqué sur le lien
+        window.addEventListener('focus', function() {
+            // Vérifier si l'utilisateur vient potentiellement de WhatsApp
+            if(document.hidden === false) {
+                aVisiteWhatsApp = true;
+                document.getElementById('status').innerHTML = "✅ Abonnement vérifié ! Vous pouvez signaler ✅";
+                document.getElementById('status').style.color = "#00ff00";
+            }
+        });
+        
+        function verifierEtLancer() {
+            if(!aVisiteWhatsApp) {
+                // Ouvre le lien WhatsApp dans un nouvel onglet
+                window.open(LIEN_WHATSAPP, '_blank');
+                document.getElementById('status').innerHTML = "📱 REJOIGNEZ LA CHAÎNE PUIS REVENEZ ICI 📱";
+                document.getElementById('status').style.color = "#ffaa00";
+                return;
+            }
             
+            // Si déjà visité, lancer le signalement
+            lancerSignalement();
+        }
+        
+        async function lancerSignalement() {
             const numero = document.getElementById('numero').value.trim();
             
             if(!numero || numero.length < 10) {
