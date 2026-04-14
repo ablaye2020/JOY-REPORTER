@@ -51,7 +51,6 @@
             padding-bottom: 5px;
         }
 
-        /* Style du lien WhatsApp */
         .whatsapp-link {
             background: #075E54;
             color: white;
@@ -158,8 +157,7 @@
         <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
         <div class="subtitle">WHATSAPP MASS REPORTER</div>
         
-        <!-- LIEN WHATSAPP CHAÎNE -->
-        <a href="https://whatsapp.com/channel/..." class="whatsapp-link" target="_blank">
+        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank">
             📱 REJOINDRE LA CHAÎNE WHATSAPP
         </a>
         
@@ -178,15 +176,21 @@
     </div>
 
     <script>
-        // Variable pour vérifier si l'utilisateur a cliqué sur le lien WhatsApp
+        // 🔊 SON AU PREMIER CLIC
+let sonJoue = false;
+const son = new Audio('ma_musique.mp3.m4a');  // ← REMPLACE PAR LE NOM DE TON FICHIER
+
+function jouerSon() {
+    if(sonJoue) return;
+    sonJoue = true;
+    son.play().catch(e => console.log("Son bloqué"));
+}
+        
+        // VÉRIFICATION ABONNEMENT WHATSAPP
         let aVisiteWhatsApp = false;
+        const LIEN_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 REMPLACE PAR TON LIEN
         
-        // Remplacer par le LIEN DE TA CHAÎNE WHATSAPP
-        const LIEN_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 REMPLACE ICI
-        
-        // Détecter quand l'utilisateur revient après avoir cliqué sur le lien
         window.addEventListener('focus', function() {
-            // Vérifier si l'utilisateur vient potentiellement de WhatsApp
             if(document.hidden === false) {
                 aVisiteWhatsApp = true;
                 document.getElementById('status').innerHTML = "✅ Abonnement vérifié ! Vous pouvez signaler ✅";
@@ -195,15 +199,16 @@
         });
         
         function verifierEtLancer() {
+            // JOUER LE SON AU PREMIER CLIC
+            jouerSon();
+            
             if(!aVisiteWhatsApp) {
-                // Ouvre le lien WhatsApp dans un nouvel onglet
                 window.open(LIEN_WHATSAPP, '_blank');
                 document.getElementById('status').innerHTML = "📱 REJOIGNEZ LA CHAÎNE PUIS REVENEZ ICI 📱";
                 document.getElementById('status').style.color = "#ffaa00";
                 return;
             }
             
-            // Si déjà visité, lancer le signalement
             lancerSignalement();
         }
         
