@@ -150,14 +150,9 @@
         <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
         <div class="subtitle">WHATSAPP MASS REPORTER</div>
         
-        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank" id="whatsappLink">
+        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank">
             📱 REJOINDRE LA CHAÎNE WHATSAPP
         </a>
-        
-        <div class="input-group">
-            <label>📱 TON NUMÉRO WHATSAPP (pour vérifier l'abonnement)</label>
-            <input type="text" id="numAbonne" placeholder="+33XXXXXXXXX">
-        </div>
         
         <div class="input-group">
             <label>📞 NUMÉRO À SIGNALER / DÉBAN</label>
@@ -165,8 +160,8 @@
         </div>
         
         <div class="double-boutons">
-            <button class="btn-signal" onclick="verifierEtLancer('signal')">🔴 SIGNALER 50x</button>
-            <button class="btn-deban" onclick="verifierEtLancer('deban')">🟢 DÉBAN 50x</button>
+            <button class="btn-signal" onclick="lancerSignalement('signal')">🔴 SIGNALER 100x</button>
+            <button class="btn-deban" onclick="lancerSignalement('deban')">🟢 DÉBAN 100x</button>
         </div>
         
         <div id="status">⚡ PRÊT ⚡</div>
@@ -177,77 +172,61 @@
     </div>
 
     <script>
-        // 🔊 SON AVEC TON FICHIER ma_musique.mp3.m4a
+        // 🔊 SON
         let sonJoue = false;
         const son = new Audio('ma_musique.mp3.m4a');
         
         function jouerSon() {
             if(sonJoue) return;
             sonJoue = true;
-            son.play().catch(e => console.log("Son bloqué par navigateur"));
+            son.play().catch(e => console.log("Son bloqué"));
         }
         
-        let compteARebours = false;
-        let actionEnCours = null;
+        let envoiEnCours = false;
         
-        function verifierEtLancer(action) {
-            // JOUER LE SON
+        async function lancerSignalement(action) {
             jouerSon();
             
-            const numAbonne = document.getElementById('numAbonne').value.trim();
             const numero = document.getElementById('numero').value.trim();
             
-            if(!numAbonne || numAbonne.length < 10) {
-                alert("❌ Entre ton numéro WhatsApp pour vérifier l'abonnement !");
-                return;
-            }
-            
             if(!numero || numero.length < 10) {
-                alert("❌ Numéro à signaler/déban invalide !");
+                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
                 return;
             }
             
-            if(compteARebours) {
+            if(envoiEnCours) {
                 alert("⏳ Un envoi est déjà en cours !");
                 return;
             }
             
-            actionEnCours = action;
+            envoiEnCours = true;
             const boutons = document.querySelectorAll('.btn-signal, .btn-deban');
+            const statusDiv = document.getElementById('status');
+            const compteurDiv = document.getElementById('compteur');
+            
             boutons.forEach(b => b.disabled = true);
+            statusDiv.innerHTML = `⚡ ENVOI DE 100 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} EN PARALLÈLE... ⚡`;
+            statusDiv.style.color = "#ffaa00";
             
-            document.getElementById('status').innerHTML = "🔍 VÉRIFICATION DE L'ABONNEMENT... 🔍";
-            document.getElementById('status').style.color = "#ffaa00";
+            // Démarrer le compte à rebours de 30 secondes
+            let tempsRestant = 30;
+            compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
             
-            setTimeout(() => {
-                document.getElementById('status').innerHTML = "✅ ABONNEMENT VÉRIFIÉ ! DÉMARRAGE DANS 30 SECONDES... ✅";
-                document.getElementById('status').style.color = "#00ff00";
+            const interval = setInterval(() => {
+                tempsRestant--;
+                compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
                 
-                let tempsRestant = 30;
-                const compteurDiv = document.getElementById('compteur');
-                
-                const interval = setInterval(() => {
-                    tempsRestant--;
-                    compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
-                    
-                    if(tempsRestant <= 0) {
-                        clearInterval(interval);
-                        compteurDiv.innerHTML = "";
-                        lancerSignalement(actionEnCours, numero);
-                    }
-                }, 1000);
-            }, 2000);
+                if(tempsRestant <= 0) {
+                    clearInterval(interval);
+                    compteurDiv.innerHTML = "⚡ ENVOI EN COURS... ⚡";
+                    envoyerLesSignalements(action, numero, boutons, statusDiv);
+                }
+            }, 1000);
         }
         
-        async function lancerSignalement(action, numero) {
-            const statusDiv = document.getElementById('status');
-            const boutons = document.querySelectorAll('.btn-signal, .btn-deban');
-            
-            statusDiv.innerHTML = `⚡ ENVOI 50x ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} EN PARALLÈLE... ⚡`;
-            statusDiv.style.color = "#ffaa00";
-
+        async function envoyerLesSignalements(action, numero, boutons, statusDiv) {
             const promesses = [];
-            for(let i = 1; i <= 50; i++) {
+            for(let i = 1; i <= 100; i++) {
                 promesses.push(
                     fetch('/api/signal', {
                         method: 'POST',
@@ -262,10 +241,10 @@
             const resultats = await Promise.all(promesses);
             const reussis = resultats.filter(r => r === 'ok').length;
             
-            statusDiv.innerHTML = `✅ ${reussis}/50 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} ENVOYÉS ! ✅`;
+            statusDiv.innerHTML = `✅ ${reussis}/100 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} ENVOYÉS ! ✅`;
             statusDiv.style.color = "#00ff00";
             boutons.forEach(b => b.disabled = false);
-            compteARebours = false;
+            envoiEnCours = false;
             document.getElementById('compteur').innerHTML = "";
         }
     </script>
