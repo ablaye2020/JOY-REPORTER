@@ -3,34 +3,29 @@ const fetch = require('node-fetch');
 const emailsSupport = [
     'support@support.whatsapp.com',
     'abuse@support.whatsapp.com',
-    'safety@whatsapp.com',
-    'legal@whatsapp.com'
+    'safety@whatsapp.com'
 ];
 
 const messagesSignal = [
-    "🔴🔴🔴 URGENCE ABSOLUE - ALERTE PÉDOFILIE 🔴🔴🔴 Ce numéro envoie des photos dénudées à ma fille de 12 ans. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - MENACE DE MORT AVEC ARMES 🔴🔴🔴 Cette personne m'a menacé avec une arme. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - TENTATIVE D'ENLÈVEMENT 🔴🔴🔴 Ce compte a contacté mon fils de 10 ans. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - VIOLENCE CONJUGALE 🔴🔴🔴 Mon ex-conjoint me menace de mort. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - INCITATION AU TERRORISME 🔴🔴🔴 Ce numéro diffuse des vidéos de décapitation. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - PROSTITUTION MINEURS 🔴🔴🔴 Ce compte propose des filles mineures. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - VENTE DE MÉDICAMENTS FAUX 🔴🔴🔴 Ce numéro vend des opiacés. Numéro :",
-    "🔴🔴🔴 URGENCE ABSOLUE - ARNAQUE AU SUPPORT WHATSAPP 🔴🔴🔴 Faux support Meta. Numéro :"
+    "🔴 HARCELEMENT HOMOPHOBE - Cette personne m'envoie des insultes 'pd', 'tarlouze', 'dégénéré' tous les jours depuis 2 mois. Numéro du harceleur :",
+    "🔴 MENACES HOMOPHOBES - Ce numéro m'a dit 'je vais te cramer ta mère la pédale' et 'on va te trouver'. J'ai peur chez moi. Numéro :",
+    "🔴 INSULTES HOMOPHOBES QUOTIDIENNES - Je reçois des messages 't'es une folle', 'suicide-toi pédale' depuis 3 semaines. Numéro :",
+    "🔴 HARCELEMENT EN GROUPE - Cette personne a créé un groupe WhatsApp 'les pd de [ville]' avec ma photo en fond. Numéro :",
+    "🔴 DOXING HOMOPHOBE - Ce numéro a publié mon adresse en disant 'venez tabasser le pd'. Je ne sors plus de chez moi. Numéro :",
+    "🔴 MENACE DE MORT HOMOPHOBE - 'Je vais te planter comme le pd que t'es' - message reçu hier. Numéro dangereux :",
+    "🔴 HARCELEMENT SUR LIEU DE TRAVAIL - Mon collègue m'envoie des messages homophobes sur WhatsApp. Je n'ose plus aller au travail. Numéro :"
 ];
 
 const messagesDeban = [
-    "📢 MON COMPTE A ÉTÉ BANNI PAR ERREUR 📢 Je respecte les règles depuis 5 ans. Numéro :",
-    "⚡ FAUX POSITIF - RÉACTIVATION URGENTE ⚡ Je n'ai jamais violé les CGU. Numéro :",
-    "🔓 HARCÈLEMENT INVERSE - ON A SIGNALÉ MON COMPTE PAR MÉCHANCETÉ 🔓 Numéro :",
-    "✅ COMPTE PROFESSIONNEL BLOQUÉ PAR ERREUR ✅ Je perds mes clients et mon travail. Numéro :",
-    "🛡️ JE N'AI JAMAIS ENVOYÉ DE SPAM 🛡️ Compte utilisé depuis 2018 sans problème. Numéro :"
+    "📢 BANNI PAR ERREUR - J'AI PORTÉ PLAINTE POUR HARCELEMENT HOMOPHOBE ET MON HARCELEUR M'A SIGNALÉ EN REPRÉSAILLES 📢 Numéro victime :",
+    "⚡ FAUX POSITIF - VICTIME D'HARCELEMENT HOMOPHOBE, C'EST MOI QUI AI ÉTÉ BANNI ⚡ Numéro :",
+    "🔓 HARCELEMENT INVERSE - J'ai signalé des insultes homophobes, l'auteur a signalé mon compte par vengeance. Numéro :"
 ];
 
-const prenoms = ["Commandant", "Capitaine", "Major", "Lieutenant", "Colonel", "Sergent"];
-const noms = ["Martin", "Bernard", "Dubois", "Richard", "Moreau", "Laurent"];
-const villes = ["Paris", "Lyon", "Marseille", "Lille", "Bordeaux", "Nice"];
+const prenoms = ["Commandant", "Capitaine", "Major", "Lieutenant"];
+const noms = ["Martin", "Bernard", "Dubois", "Richard"];
+const villes = ["Paris", "Lyon", "Marseille", "Lille"];
 
-// Fonction pour obtenir la date et l'heure formatées
 function getDateTime() {
     const now = new Date();
     const jour = now.getDate().toString().padStart(2, '0');
@@ -39,11 +34,7 @@ function getDateTime() {
     const heures = now.getHours().toString().padStart(2, '0');
     const minutes = now.getMinutes().toString().padStart(2, '0');
     const secondes = now.getSeconds().toString().padStart(2, '0');
-    return {
-        date: `${jour}/${mois}/${annee}`,
-        heure: `${heures}:${minutes}:${secondes}`,
-        complet: `${jour}/${mois}/${annee} à ${heures}:${minutes}:${secondes}`
-    };
+    return `${jour}/${mois}/${annee} à ${heures}:${minutes}:${secondes}`;
 }
 
 async function envoyerMailCat(destinataire, sujet, message) {
@@ -75,32 +66,23 @@ module.exports = async (req, res) => {
     const { numero, index, action } = req.body;
     
     const messages = action === 'deban' ? messagesDeban : messagesSignal;
-    const titre = action === 'deban' ? "DEMANDE RÉACTIVATION URGENTE" : "SIGNALEMENT PRIORITAIRE";
+    const titre = action === 'deban' ? "RECOURS - BAN PAR ERREUR" : "HARCELEMENT HOMOPHOBE - URGENCE";
     
     const nomOfficier = prenoms[Math.floor(Math.random() * prenoms.length)];
     const ville = villes[Math.floor(Math.random() * villes.length)];
-    const numeroPlainte = Math.floor(Math.random() * 900000) + 100000;
     const dateHeure = getDateTime();
     
-    const sujet = `🔴🔴🔴 ${titre} - ${dateHeure.date} 🔴🔴🔴`;
-    
+    const sujet = `🔴 ${titre} - ${dateHeure} 🔴`;
     const message = `${messages[index % messages.length]} ${numero}
 
-📅 DATE ET HEURE DU SIGNALEMENT : ${dateHeure.complet}
-📍 COMMISSARIAT : ${ville}
-📋 NUMÉRO DE PLAINTE : ${numeroPlainte}
-⏱️ HEURE EXACTE : ${dateHeure.heure}
+📅 Signalement : ${dateHeure}
+📍 Commissariat : ${ville}
 
-${action === 'deban' ? '📢 DEMANDE DE RÉACTIVATION IMMÉDIATE 📢' : '🔴 REQUIERT UN TRAITEMENT IMMÉDIAT 🔴'}
-
-Ce signalement est enregistré dans notre système sous le numéro ${numeroPlainte}.
-Plainte déposée le ${dateHeure.complet}.
+${action === 'deban' ? 'RECOURS - COMPTE BANNI PAR ERREUR' : 'URGENCE - HARCELEMENT HOMOPHOBE'}
 
 Cordialement,
 ${nomOfficier} ${noms[Math.floor(Math.random() * noms.length)]}
-Officier traitant - ${ville}
-N° plainte: ${numeroPlainte}
-Date: ${dateHeure.complet}`;
+Officier traitant - ${ville}`;
     
     try {
         for (const dest of emailsSupport) {
