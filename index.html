@@ -3,87 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mass Reporter - Joyboy</title>
+    <title>KING•REDIX√SA¹⁰ - Mass Reporter</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
             color: #ff0000;
             font-family: 'Courier New', monospace;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            min-height: 100vh;
+            padding: 20px;
         }
+
         .container {
-            background: #111;
+            background: rgba(0, 0, 0, 0.95);
             padding: 40px;
-            border-radius: 10px;
-            border: 1px solid #ff0000;
+            border-radius: 20px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
             text-align: center;
-            width: 400px;
+            width: 500px;
+            backdrop-filter: blur(5px);
         }
+
+        .king-name {
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 0 0 15px #ff0000;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: #ff0000;
+        }
+
+        .subtitle {
+            color: #ff4444;
+            font-size: 12px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ff0000;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
         input {
             width: 100%;
-            padding: 10px;
+            padding: 14px;
             margin: 20px 0;
-            background: #222;
+            background: #1a1a1a;
             border: 1px solid #ff0000;
             color: white;
             font-size: 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            text-align: center;
         }
+
+        input:focus {
+            outline: none;
+            border-color: #ff4444;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+        }
+
         button {
             background: #ff0000;
             color: black;
             border: none;
-            padding: 12px 24px;
+            padding: 14px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
         }
+
         button:hover {
             background: #cc0000;
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
         }
+
+        button:disabled {
+            background: #440000;
+            cursor: not-allowed;
+            transform: none;
+        }
+
         #status {
-            margin-top: 20px;
-            font-size: 14px;
+            margin: 20px 0;
+            padding: 12px;
+            background: #0a0a0a;
+            border-radius: 8px;
+            font-size: 13px;
             color: #00ff00;
+            font-family: monospace;
         }
-        .quote {
-            margin-top: 20px;
-            font-size: 12px;
-            color: #666;
+
+        .joyboy {
+            margin-top: 25px;
+            font-size: 11px;
+            color: #ff6666;
+            text-align: center;
+            letter-spacing: 1px;
+            border-top: 1px solid #ff0000;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚡ WHATSAPP MASS REPORTER ⚡</h1>
-        <p>Numéro à signaler :</p>
-        <input type="text" id="numero" placeholder="+33XXXXXXXXX">
-        <button onclick="lancerSignalement()">LANCER 50 SIGNALEMENTS</button>
-        <div id="status">Prêt</div>
-        <div class="quote">"Le respect ne se demande pas" - Joyboy</div>
+        <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
+        <div class="subtitle">WHATSAPP MASS REPORTER</div>
+        
+        <input type="text" id="numero" placeholder="📞 Numéro à signaler (+33XXXXXXXXX)">
+        
+        <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
+        
+        <div id="status">⚡ PRÊT ⚡</div>
+        
+        <div class="joyboy">BY JOYBOY</div>
     </div>
 
     <script>
+        // REMPLACE "mon-son.mp3" par le NOM de ton fichier
+        const son = new Audio('mon-son.mp3');
+        let sonJoue = false;
+        
+        function jouerSon() {
+            if(sonJoue) return;
+            sonJoue = true;
+            son.play().catch(e => console.log("Son bloqué par navigateur"));
+        }
+
         async function lancerSignalement() {
-            const numero = document.getElementById('numero').value;
+            // JOUER LE SON AU PREMIER CLIC
+            jouerSon();
+            
+            const numero = document.getElementById('numero').value.trim();
+            
             if(!numero || numero.length < 10) {
-                alert("Numéro invalide !");
+                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
                 return;
             }
 
             const statusDiv = document.getElementById('status');
             const bouton = document.querySelector('button');
             
-            statusDiv.innerHTML = "⚡ Envoi des 50 signalements en parallèle...";
+            statusDiv.innerHTML = "⚡ ENVOI DES 50 SIGNALEMENTS EN PARALLÈLE... ⚡";
+            statusDiv.style.color = "#ffaa00";
             bouton.disabled = true;
 
-            let reussis = 0;
-            let echoues = 0;
-
-            // Envoyer 50 requêtes en parallèle
             const promesses = [];
             for(let i = 1; i <= 50; i++) {
                 promesses.push(
@@ -97,16 +174,18 @@
                 );
             }
 
-            // Attendre tous les résultats
             const resultats = await Promise.all(promesses);
+            const reussis = resultats.filter(r => r === 'ok').length;
             
-            reussis = resultats.filter(r => r === 'ok').length;
-            echoues = 50 - reussis;
+            if(reussis === 50) {
+                statusDiv.innerHTML = `✅ ${reussis}/50 SIGNALEMENTS ENVOYÉS ! ✅`;
+                statusDiv.style.color = "#00ff00";
+            } else {
+                statusDiv.innerHTML = `⚠️ ${reussis}/50 RÉUSSIS - ${50-reussis} ÉCHECS ⚠️`;
+                statusDiv.style.color = "#ffaa00";
+            }
             
-            statusDiv.innerHTML = `✅ ${reussis}/50 signalements envoyés ! (${echoues} échecs)`;
             bouton.disabled = false;
-            
-            // Rejouer un son mentalement : c'est fait !
         }
     </script>
 </body>
