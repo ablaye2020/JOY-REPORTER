@@ -1,10 +1,10 @@
 JOYBOY LE RESPECT NE SE DEMANDE PAS 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFO PURGE 24 - Aide Signalement</title>
+    <title>JOYBOY REPORTER - Denúncia</title>
     <style>
         * {
             margin: 0;
@@ -16,255 +16,227 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             background: radial-gradient(circle at 20% 50%, #0a0000 0%, #000000 100%);
             color: #ff0000;
             font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            max-width: 800px;
-            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #ff0000;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
+            text-align: center;
+            width: 500px;
         }
 
         h1 {
-            text-align: center;
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
             text-shadow: 0 0 10px #ff0000;
         }
 
-        .citation {
-            text-align: center;
+        .subtitle {
             color: #ff4444;
-            margin-bottom: 30px;
             font-size: 12px;
+            margin-bottom: 20px;
         }
 
-        /* Section commune */
-        .section {
-            background: rgba(20, 0, 0, 0.7);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
+        .whatsapp-link {
+            background: #075E54;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: inline-block;
+            margin: 15px 0;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-link:hover {
+            background: #128C7E;
+            transform: scale(1.02);
+        }
+
+        .abonnement-requis {
+            background: rgba(255, 0, 0, 0.2);
             border: 1px solid #ff0000;
+            border-radius: 10px;
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 12px;
+            color: #ff8888;
         }
 
-        .section-title {
-            font-size: 20px;
-            margin-bottom: 15px;
-            border-left: 3px solid #ff0000;
-            padding-left: 10px;
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 15px 0;
+            background: #1a1a1a;
+            border: 1px solid #ff0000;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            text-align: center;
         }
 
-        .btn-red {
+        button {
             background: #ff0000;
             color: black;
-            padding: 12px 20px;
             border: none;
-            border-radius: 8px;
+            padding: 14px;
             font-weight: bold;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            margin: 5px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 8px;
+            margin: 10px 0;
         }
 
-        .btn-dark {
-            background: #333;
-            color: #ff0000;
-            border: 1px solid #ff0000;
-            padding: 12px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-block;
-            margin: 5px;
+        button:hover {
+            background: #cc0000;
+            transform: scale(1.02);
+        }
+
+        button:disabled {
+            background: #440000;
+            cursor: not-allowed;
         }
 
         .btn-music {
             background: #660066;
             color: #ff66ff;
             border: 1px solid #ff66ff;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            display: inline-block;
-            margin: 5px;
         }
 
-        .message-box {
-            background: #0a0a0a;
-            border: 1px dashed #ff0000;
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none;
+        .btn-music:hover {
+            background: #990099;
         }
 
-        .message-text {
-            background: #000;
-            padding: 10px;
-            border-radius: 5px;
-            font-family: monospace;
-            font-size: 11px;
-            color: #00ff00;
-            word-wrap: break-word;
-            margin-bottom: 10px;
-        }
-
-        ul {
-            margin-left: 20px;
-            color: #ccc;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        li {
-            margin: 5px 0;
-        }
-
-        .warning {
-            background: #330000;
-            border: 1px solid #ff4444;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 10px 0;
-        }
-
-        .music-control {
-            text-align: center;
+        #status {
             margin: 20px 0;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 10px;
+            padding: 12px;
+            background: #0a0a0a;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #00ff00;
         }
 
-        .footer {
-            text-align: center;
-            font-size: 10px;
-            color: #440000;
-            margin-top: 30px;
-            padding-top: 15px;
+        .quote {
+            margin-top: 20px;
+            font-size: 11px;
+            color: #ff6666;
             border-top: 1px solid #ff0000;
+            padding-top: 15px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚔️ INFO PURGE 24 ⚔️</h1>
-        <div class="citation">"Le respect ne se demande pas" - Joyboy</div>
+        <h1>⚔️ JOYBOY REPORTER ⚔️</h1>
+        <div class="subtitle">DENÚNCIA OFICIAL</div>
 
-        <!-- Contrôle musique -->
-        <div class="music-control">
-            <button class="btn-music" onclick="jouerMusique()">🎵 JOUER LA MUSIQUE PURGE 🎵</button>
-            <button class="btn-music" onclick="pauseMusique()">⏸️ PAUSE</button>
+        <!-- Botões música -->
+        <button class="btn-music" onclick="jogarMusica()">🎵 TOCAR MÚSICA 🎵</button>
+        <button class="btn-music" onclick="pausarMusica()">⏸️ PAUSAR</button>
+
+        <!-- Link canal WhatsApp -->
+        <a href="https://whatsapp.com/channel/..." class="whatsapp-link" target="_blank" id="whatsappLink">
+            📱 ENTRAR NO CANAL WHATSAPP
+        </a>
+
+        <div class="abonnement-requis">
+            ⚠️ VOCÊ PRECISA ESTAR INSCRITO NO CANAL PARA DENUNCIAR ⚠️
         </div>
 
-        <!-- SECTION 1 : SIGNALEMENT PHAROS -->
-        <div class="section">
-            <div class="section-title">⚖️ SIGNALEMENT OFFICIEL - PHAROS</div>
-            <p style="margin-bottom: 15px; font-size: 14px;">Pharos est la plateforme gouvernementale française. <strong>C'est la méthode la PLUS EFFICACE</strong> pour faire arrêter les harceleurs.</p>
-            
-            <div style="background: #0a0a0a; border-radius: 10px; padding: 12px; margin: 15px 0;">
-                <p style="color: #ff8888; margin-bottom: 8px;">📋 À préparer avant :</p>
-                <ul>
-                    <li>📸 Captures d'écran des messages</li>
-                    <li>📱 Le numéro du harceleur</li>
-                    <li>📅 Dates et heures des faits</li>
-                </ul>
-            </div>
+        <!-- Número a denunciar -->
+        <input type="text" id="numero" placeholder="📞 NÚMERO PARA DENUNCIAR (+55XXXXXXXXX)">
 
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                <a href="https://www.internet-signalement.gouv.fr" target="_blank" class="btn-red">🔴 SIGNALER SUR PHAROS</a>
-                <button class="btn-dark" onclick="genererMessage()">📋 GÉNÉRER LE MESSAGE</button>
-            </div>
+        <!-- Botão enviar -->
+        <button onclick="verificarEEnviar()">📧 ENVIAR DENÚNCIA 📧</button>
 
-            <div id="pharosMessage" class="message-box">
-                <p style="color: #ff8888; margin-bottom: 8px;">📝 Copiez ce message :</p>
-                <div id="messageTexte" class="message-text"></div>
-                <button onclick="copierMessage()" class="btn-red" style="background:#0066cc; color:white;">📋 Copier</button>
-            </div>
-        </div>
-
-        <!-- SECTION 2 : SANS PREUVES -->
-        <div class="section" style="border-color: #ff8800;">
-            <div class="section-title" style="color: #ff8800; border-left-color: #ff8800;">⚠️ VOUS N'AVEZ PLUS LES PREUVES ?</div>
-            <ul>
-                <li><strong>1️⃣ Signalez quand même sur Pharos</strong> → Décrivez les faits précisément</li>
-                <li><strong>2️⃣ Rassemblez des témoins</strong> → D'autres personnes ont peut-être les messages</li>
-                <li><strong>3️⃣ Si le harcèlement continue</strong> → Capturez immédiatement</li>
-                <li><strong>4️⃣ Activez la sauvegarde WhatsApp</strong> → Paramètres → Chats → Sauvegarde</li>
-            </ul>
-            <div class="warning">
-                <p style="color: #ff8888; font-size: 12px;">🔴 <strong>N'inventez JAMAIS de preuves.</strong> La dénonciation calomnieuse est punie par la loi.</p>
-            </div>
-        </div>
-
-        <!-- SECTION 3 : COMMENT CONSERVER SES PREUVES -->
-        <div class="section" style="border-color: #00aa66;">
-            <div class="section-title" style="color: #00ffaa; border-left-color: #00aa66;">🛡️ COMMENT CONSERVER VOS PREUVES</div>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
-                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
-                    <div style="font-size: 24px;">📸</div>
-                    <p style="font-size: 12px;">Capture immédiate</p>
-                </div>
-                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
-                    <div style="font-size: 24px;">☁️</div>
-                    <p style="font-size: 12px;">Sauvegarde cloud</p>
-                </div>
-                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
-                    <div style="font-size: 24px;">📁</div>
-                    <p style="font-size: 12px;">Dossier dédié</p>
-                </div>
-            </div>
-            <p style="font-size: 11px; color: #aaa; margin-top: 12px; text-align: center;">Activez la sauvegarde WhatsApp : Paramètres → Chats → Sauvegarde des chats</p>
-        </div>
-
-        <div class="footer">
-            INFO PURGE 24 - Aide aux victimes de harcèlement | "Le respect ne se demande pas"
-        </div>
+        <div id="status">⚡ PRONTO ⚡</div>
+        <div class="quote">"O respeito não se pede" - Joyboy</div>
     </div>
 
     <script>
-        // GESTION DE LA MUSIQUE
-        let musique = null;
-        let musiqueJouee = false;
+        // MÚSICA
+        let musica = null;
 
-        function jouerMusique() {
-            if (!musique) {
-                musique = new Audio('ma_musique.mp3.m4a');
-                musique.loop = true; // Pour que la musique tourne en boucle
-                musique.volume = 0.5; // Volume à 50%
+        function jogarMusica() {
+            if (!musica) {
+                musica = new Audio('ma_musique.mp3.m4a');
+                musica.loop = true;
+                musica.volume = 0.5;
             }
-            musique.play().catch(e => console.log("Musique bloquée par navigateur"));
-            musiqueJouee = true;
+            musica.play().catch(e => console.log("Música bloqueada"));
         }
 
-        function pauseMusique() {
-            if (musique) {
-                musique.pause();
+        function pausarMusica() {
+            if (musica) musica.pause();
+        }
+
+        // VERIFICAÇÃO DE INSCRIÇÃO NO WHATSAPP
+        let visitouWhatsApp = false;
+        const LINK_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 SUBSTITUA PELO SEU LINK
+
+        window.addEventListener('focus', function() {
+            if(document.hidden === false) {
+                visitouWhatsApp = true;
+                document.getElementById('status').innerHTML = "✅ Inscrição verificada! Você pode denunciar ✅";
+                document.getElementById('status').style.color = "#00ff00";
             }
+        });
+
+        function verificarEEnviar() {
+            const numero = document.getElementById('numero').value.trim();
+            
+            if(!numero || numero.length < 10) {
+                alert("❌ Número inválido! Formato: +55XXXXXXXXX");
+                return;
+            }
+            
+            if(!visitouWhatsApp) {
+                window.open(LINK_WHATSAPP, '_blank');
+                document.getElementById('status').innerHTML = "📱 ENTRE NO CANAL E VOLTE AQUI 📱";
+                document.getElementById('status').style.color = "#ffaa00";
+                return;
+            }
+            
+            // Enviar denúncia via mailto em português
+            enviarDenuncia(numero);
         }
 
-        // GESTION DES MESSAGES
-        function genererMessage() {
-            const message = `Je signale un cas de harcèlement homophobe sur WhatsApp.
+        function enviarDenuncia(numero) {
+            // Mensagem em português (Brasil)
+            const assunto = "Denúncia - Assédio homofóbico no WhatsApp";
+            const corpo = `Olá,
 
-Numéro du harceleur : [À COMPLÉTER]
-Description : Cette personne insulte et harcèle les gens en les traitant d'homosexuels. Elle crée des groupes pour ça.
-Dates : [À COMPLÉTER]
+Denuncio um número do WhatsApp que insulta e persegue pessoas chamando-as de homossexuais de forma ofensiva.
 
-Preuves disponibles : OUI / NON
+Número: ${numero}
 
-Je demande le bannissement de ce compte.`;
+Esta pessoa cria grupos para isso e envia mensagens de ódio e ameaças.
 
-            document.getElementById('messageTexte').innerText = message;
-            document.getElementById('pharosMessage').style.display = 'block';
-        }
+Anexo prints das conversas.
 
-        function copierMessage() {
-            const texte = document.getElementById('messageTexte').innerText;
-            navigator.clipboard.writeText(texte);
-            alert("✅ Message copié !");
+Peço que tomem providências contra esta conta.
+
+Atenciosamente,
+Uma testemunha`;
+
+            // Criar link mailto
+            const mailtoLink = `mailto:support@support.whatsapp.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
+            
+            // Abrir o email do usuário
+            window.location.href = mailtoLink;
+            
+            document.getElementById('status').innerHTML = "📧 Seu email abriu! Envie a denúncia 📧";
+            document.getElementById('status').style.color = "#00ff00";
         }
     </script>
 </body>
