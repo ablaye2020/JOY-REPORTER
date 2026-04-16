@@ -79,6 +79,18 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             margin: 5px;
         }
 
+        .btn-music {
+            background: #660066;
+            color: #ff66ff;
+            border: 1px solid #ff66ff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+        }
+
         .message-box {
             background: #0a0a0a;
             border: 1px dashed #ff0000;
@@ -118,6 +130,14 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             margin: 10px 0;
         }
 
+        .music-control {
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+
         .footer {
             text-align: center;
             font-size: 10px;
@@ -132,6 +152,12 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
     <div class="container">
         <h1>⚔️ INFO PURGE 24 ⚔️</h1>
         <div class="citation">"Le respect ne se demande pas" - Joyboy</div>
+
+        <!-- Contrôle musique -->
+        <div class="music-control">
+            <button class="btn-music" onclick="jouerMusique()">🎵 JOUER LA MUSIQUE PURGE 🎵</button>
+            <button class="btn-music" onclick="pauseMusique()">⏸️ PAUSE</button>
+        </div>
 
         <!-- SECTION 1 : SIGNALEMENT PHAROS -->
         <div class="section">
@@ -199,12 +225,38 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
     </div>
 
     <script>
+        // GESTION DE LA MUSIQUE
+        let musique = null;
+        let musiqueJouee = false;
+
+        function jouerMusique() {
+            if (!musique) {
+                musique = new Audio('ma_musique.mp3.m4a');
+                musique.loop = true; // Pour que la musique tourne en boucle
+                musique.volume = 0.5; // Volume à 50%
+            }
+            musique.play().catch(e => console.log("Musique bloquée par navigateur"));
+            musiqueJouee = true;
+        }
+
+        function pauseMusique() {
+            if (musique) {
+                musique.pause();
+            }
+        }
+
+        // GESTION DES MESSAGES
         function genererMessage() {
-            const message = `Je signale un cas de harcèlement sur WhatsApp.
+            const message = `Je signale un cas de harcèlement homophobe sur WhatsApp.
+
 Numéro du harceleur : [À COMPLÉTER]
-Description : [À COMPLÉTER]
+Description : Cette personne insulte et harcèle les gens en les traitant d'homosexuels. Elle crée des groupes pour ça.
 Dates : [À COMPLÉTER]
-Preuves disponibles : OUI / NON`;
+
+Preuves disponibles : OUI / NON
+
+Je demande le bannissement de ce compte.`;
+
             document.getElementById('messageTexte').innerText = message;
             document.getElementById('pharosMessage').style.display = 'block';
         }
@@ -217,4 +269,3 @@ Preuves disponibles : OUI / NON`;
     </script>
 </body>
 </html>
-JOYBOY
