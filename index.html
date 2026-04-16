@@ -1,9 +1,10 @@
+JOYBOY LE RESPECT NE SE DEMANDE PAS 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KING•REDIX√SA¹⁰ - Mass Reporter</title>
+    <title>INFO PURGE 24 - Aide Signalement</title>
     <style>
         * {
             margin: 0;
@@ -12,403 +13,208 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%);
+            background: radial-gradient(circle at 20% 50%, #0a0000 0%, #000000 100%);
             color: #ff0000;
             font-family: 'Courier New', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 40px;
-            border-radius: 20px;
-            border: 2px solid #ff0000;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
-            text-align: center;
-            width: 500px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .king-name {
-            font-size: 28px;
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        .citation {
+            text-align: center;
+            color: #ff4444;
+            margin-bottom: 30px;
+            font-size: 12px;
+        }
+
+        /* Section commune */
+        .section {
+            background: rgba(20, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid #ff0000;
+        }
+
+        .section-title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border-left: 3px solid #ff0000;
+            padding-left: 10px;
+        }
+
+        .btn-red {
+            background: #ff0000;
+            color: black;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
             font-weight: bold;
-            text-shadow: 0 0 15px #ff0000;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .btn-dark {
+            background: #333;
+            color: #ff0000;
+            border: 1px solid #ff0000;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .message-box {
+            background: #0a0a0a;
+            border: 1px dashed #ff0000;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .message-text {
+            background: #000;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 11px;
+            color: #00ff00;
+            word-wrap: break-word;
             margin-bottom: 10px;
         }
 
-        .subtitle {
-            color: #ff4444;
-            font-size: 12px;
-            margin-bottom: 20px;
-        }
-
-        .whatsapp-link {
-            background: #075E54;
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            display: inline-block;
-            margin: 15px 0;
-            font-size: 14px;
-        }
-
-        .input-group {
-            margin: 15px 0;
-            text-align: left;
-        }
-
-        .input-group label {
-            font-size: 11px;
-            color: #ff8888;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        input {
-            width: 100%;
-            padding: 14px;
-            background: #1a1a1a;
-            border: 1px solid #ff0000;
-            color: white;
-            font-size: 16px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .double-boutons {
-            display: flex;
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .btn-signal {
-            background: #ff0000;
-            color: black;
-            border: none;
-            padding: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            flex: 1;
-            border-radius: 8px;
-        }
-
-        .btn-deban {
-            background: #00aa00;
-            color: black;
-            border: none;
-            padding: 14px;
-            font-weight: bold;
-            cursor: pointer;
-            flex: 1;
-            border-radius: 8px;
-        }
-
-        .btn-signal:hover { background: #cc0000; }
-        .btn-deban:hover { background: #008800; }
-
-        button:disabled {
-            background: #440000;
-            cursor: not-allowed;
-        }
-
-        #status {
-            margin: 20px 0;
-            padding: 12px;
-            background: #0a0a0a;
-            border-radius: 8px;
+        ul {
+            margin-left: 20px;
+            color: #ccc;
             font-size: 13px;
-            color: #00ff00;
+            line-height: 1.6;
         }
 
-        .joyboy {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #ff6666;
-            border-top: 1px solid #ff0000;
-            padding-top: 15px;
+        li {
+            margin: 5px 0;
         }
 
-        .footer-text {
-            font-size: 9px;
-            margin-top: 10px;
-            color: #440000;
-        }
-
-        .compteur {
-            font-size: 12px;
-            color: #ffaa00;
+        .warning {
+            background: #330000;
+            border: 1px solid #ff4444;
+            border-radius: 10px;
+            padding: 12px;
             margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #440000;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ff0000;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="king-name">𝐊𝐈𝐍𝐆•𝐑𝐄𝐃𝐈𝐗√𝐒𝐀¹⁰</div>
-        <div class="subtitle">WHATSAPP MASS REPORTER</div>
-        
-        <a href="https://whatsapp.com/channel/0029VbBGPvF8aKvKN8YQft2d" class="whatsapp-link" target="_blank">
-            📱 REJOINDRE LA CHAÎNE WHATSAPP
-        </a>
-        
-        <div class="input-group">
-            <label>📞 NUMÉRO À SIGNALER / DÉBAN</label>
-            <input type="text" id="numero" placeholder="+33XXXXXXXXX">
+        <h1>⚔️ INFO PURGE 24 ⚔️</h1>
+        <div class="citation">"Le respect ne se demande pas" - Joyboy</div>
+
+        <!-- SECTION 1 : SIGNALEMENT PHAROS -->
+        <div class="section">
+            <div class="section-title">⚖️ SIGNALEMENT OFFICIEL - PHAROS</div>
+            <p style="margin-bottom: 15px; font-size: 14px;">Pharos est la plateforme gouvernementale française. <strong>C'est la méthode la PLUS EFFICACE</strong> pour faire arrêter les harceleurs.</p>
+            
+            <div style="background: #0a0a0a; border-radius: 10px; padding: 12px; margin: 15px 0;">
+                <p style="color: #ff8888; margin-bottom: 8px;">📋 À préparer avant :</p>
+                <ul>
+                    <li>📸 Captures d'écran des messages</li>
+                    <li>📱 Le numéro du harceleur</li>
+                    <li>📅 Dates et heures des faits</li>
+                </ul>
+            </div>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="https://www.internet-signalement.gouv.fr" target="_blank" class="btn-red">🔴 SIGNALER SUR PHAROS</a>
+                <button class="btn-dark" onclick="genererMessage()">📋 GÉNÉRER LE MESSAGE</button>
+            </div>
+
+            <div id="pharosMessage" class="message-box">
+                <p style="color: #ff8888; margin-bottom: 8px;">📝 Copiez ce message :</p>
+                <div id="messageTexte" class="message-text"></div>
+                <button onclick="copierMessage()" class="btn-red" style="background:#0066cc; color:white;">📋 Copier</button>
+            </div>
         </div>
-        
-        <div class="double-boutons">
-            <button class="btn-signal" onclick="lancerSignalement('signal')">🔴 SIGNALER 100x</button>
-            <button class="btn-deban" onclick="lancerSignalement('deban')">🟢 DÉBAN 100x</button>
+
+        <!-- SECTION 2 : SANS PREUVES -->
+        <div class="section" style="border-color: #ff8800;">
+            <div class="section-title" style="color: #ff8800; border-left-color: #ff8800;">⚠️ VOUS N'AVEZ PLUS LES PREUVES ?</div>
+            <ul>
+                <li><strong>1️⃣ Signalez quand même sur Pharos</strong> → Décrivez les faits précisément</li>
+                <li><strong>2️⃣ Rassemblez des témoins</strong> → D'autres personnes ont peut-être les messages</li>
+                <li><strong>3️⃣ Si le harcèlement continue</strong> → Capturez immédiatement</li>
+                <li><strong>4️⃣ Activez la sauvegarde WhatsApp</strong> → Paramètres → Chats → Sauvegarde</li>
+            </ul>
+            <div class="warning">
+                <p style="color: #ff8888; font-size: 12px;">🔴 <strong>N'inventez JAMAIS de preuves.</strong> La dénonciation calomnieuse est punie par la loi.</p>
+            </div>
         </div>
-        
-        <div id="status">⚡ PRÊT ⚡</div>
-        <div id="compteur" class="compteur"></div>
-        
-        <div class="joyboy">BY JOYBOY</div>
-        <div class="footer-text">⚡ Système de signalement rapide - Le respect ne se demande pas ⚡</div>
+
+        <!-- SECTION 3 : COMMENT CONSERVER SES PREUVES -->
+        <div class="section" style="border-color: #00aa66;">
+            <div class="section-title" style="color: #00ffaa; border-left-color: #00aa66;">🛡️ COMMENT CONSERVER VOS PREUVES</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
+                    <div style="font-size: 24px;">📸</div>
+                    <p style="font-size: 12px;">Capture immédiate</p>
+                </div>
+                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
+                    <div style="font-size: 24px;">☁️</div>
+                    <p style="font-size: 12px;">Sauvegarde cloud</p>
+                </div>
+                <div style="background: #0a0a0a; border-radius: 8px; padding: 10px; text-align: center;">
+                    <div style="font-size: 24px;">📁</div>
+                    <p style="font-size: 12px;">Dossier dédié</p>
+                </div>
+            </div>
+            <p style="font-size: 11px; color: #aaa; margin-top: 12px; text-align: center;">Activez la sauvegarde WhatsApp : Paramètres → Chats → Sauvegarde des chats</p>
+        </div>
+
+        <div class="footer">
+            INFO PURGE 24 - Aide aux victimes de harcèlement | "Le respect ne se demande pas"
+        </div>
     </div>
 
     <script>
-        // 🔊 SON
-        let sonJoue = false;
-        const son = new Audio('ma_musique.mp3.m4a');
-        
-        function jouerSon() {
-            if(sonJoue) return;
-            sonJoue = true;
-            son.play().catch(e => console.log("Son bloqué"));
-        }
-        
-        let envoiEnCours = false;
-        
-        async function lancerSignalement(action) {
-            jouerSon();
-            
-            const numero = document.getElementById('numero').value.trim();
-            
-            if(!numero || numero.length < 10) {
-                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
-                return;
-            }
-            
-            if(envoiEnCours) {
-                alert("⏳ Un envoi est déjà en cours !");
-                return;
-            }
-            
-            envoiEnCours = true;
-            const boutons = document.querySelectorAll('.btn-signal, .btn-deban');
-            const statusDiv = document.getElementById('status');
-            const compteurDiv = document.getElementById('compteur');
-            
-            boutons.forEach(b => b.disabled = true);
-            statusDiv.innerHTML = `⚡ ENVOI DE 100 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} EN PARALLÈLE... ⚡`;
-            statusDiv.style.color = "#ffaa00";
-            
-            // Démarrer le compte à rebours de 30 secondes
-            let tempsRestant = 30;
-            compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
-            
-            const interval = setInterval(() => {
-                tempsRestant--;
-                compteurDiv.innerHTML = `⏳ ENVOI DANS ${tempsRestant} SECONDES... ⏳`;
-                
-                if(tempsRestant <= 0) {
-                    clearInterval(interval);
-                    compteurDiv.innerHTML = "⚡ ENVOI EN COURS... ⚡";
-                    envoyerLesSignalements(action, numero, boutons, statusDiv);
-                }
-            }, 1000);
-        }
-        
-        async function envoyerLesSignalements(action, numero, boutons, statusDiv) {
-            const promesses = [];
-            for(let i = 1; i <= 100; i++) {
-                promesses.push(
-                    fetch('/api/signal', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ numero: numero, index: i, action: action })
-                    })
-                    .then(res => res.ok ? 'ok' : 'fail')
-                    .catch(() => 'fail')
-                );
-            }
-
-            const resultats = await Promise.all(promesses);
-            const reussis = resultats.filter(r => r === 'ok').length;
-            
-            statusDiv.innerHTML = `✅ ${reussis}/100 ${action === 'signal' ? 'SIGNALEMENTS' : 'DÉBANS'} ENVOYÉS ! ✅`;
-            statusDiv.style.color = "#00ff00";
-            boutons.forEach(b => b.disabled = false);
-            envoiEnCours = false;
-            document.getElementById('compteur').innerHTML = "";
-        }
-    <!-- ============================================ -->
-<!-- SECTION 1 : SIGNALEMENT PHAROS (OFFICIEL)    -->
-<!-- ============================================ -->
-<div class="pharos-section" style="background: linear-gradient(135deg, #0a0505, #1a0000); border: 2px solid #ff0000; border-radius: 20px; padding: 25px; margin: 30px 0; box-shadow: 0 0 20px rgba(255,0,0,0.2);">
-    
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-        <div style="background: #ff0000; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">⚖️</div>
-        <h3 style="color: #ff0000; margin: 0; font-size: 22px;">SIGNALEMENT OFFICIEL - PHAROS</h3>
-    </div>
-    
-    <p style="color: #ffaaaa; margin-bottom: 15px; font-size: 14px;">
-        <strong>Pharos est la plateforme gouvernementale française</strong> de signalement des contenus illégaux. 
-        C'est la <strong>méthode la PLUS EFFICACE</strong> pour faire arrêter les harceleurs.
-    </p>
-    
-    <div style="background: #000000; border-radius: 15px; padding: 15px; margin: 15px 0; border-left: 4px solid #ff0000;">
-        <p style="color: #ff8888; margin-bottom: 10px; font-size: 13px;">📋 <strong>CE QU'IL FAUT PRÉPARER AVANT :</strong></p>
-        <ul style="color: #cccccc; margin-left: 20px; font-size: 12px; line-height: 1.6;">
-            <li>📸 Captures d'écran des messages insultants / menaçants</li>
-            <li>📱 Le numéro WhatsApp du harceleur</li>
-            <li>📅 Les dates et heures des faits</li>
-            <li>📝 Description précise de ce qu'il s'est passé</li>
-        </ul>
-    </div>
-    
-    <div style="display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap;">
-        <a href="https://www.internet-signalement.gouv.fr" target="_blank" style="background: #ff0000; color: black; padding: 14px 25px; border-radius: 10px; text-decoration: none; font-weight: bold; text-align: center; flex: 1; transition: all 0.3s ease;">
-            🔴 SIGNALER SUR PHAROS 🔴
-        </a>
-        <button onclick="genererMessagePharos()" style="background: #333; color: #ff0000; border: 1px solid #ff0000; padding: 14px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; flex: 1;">
-            📋 GÉNÉRER LE MESSAGE À COPIER
-        </button>
-    </div>
-    
-    <div id="pharosMessage" style="display: none; background: #0a0a0a; border: 1px dashed #ff0000; border-radius: 10px; padding: 15px; margin-top: 15px;">
-        <p style="color: #ff8888; margin-bottom: 10px; font-size: 12px;">📝 <strong>Copiez ce message sur le site Pharos :</strong></p>
-        <div id="messageTexte" style="background: #000; padding: 12px; border-radius: 8px; font-family: monospace; font-size: 11px; color: #00ff00; word-wrap: break-word;"></div>
-        <button onclick="copierMessage()" style="background: #0066cc; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin-top: 10px; cursor: pointer;">📋 Copier le message</button>
-    </div>
-    
-    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #330000; font-size: 11px; color: #884444; text-align: center;">
-        ⚖️ Le signalement Pharos est <strong>anonyme</strong> et pris au sérieux par les autorités. 
-        En cas de danger immédiat, appelez le <strong>17</strong> (police) ou le <strong>114</strong> (SMS sourds/malentendants).
-    </div>
-</div>
-
-<!-- ============================================ -->
-<!-- SECTION 2 : AIDE SI LES PREUVES SONT PERDUES -->
-<!-- ============================================ -->
-<div class="no-proofs" style="background: linear-gradient(135deg, #1a0a00, #0a0500); border: 2px solid #ff8800; border-radius: 20px; padding: 25px; margin: 30px 0; box-shadow: 0 0 15px rgba(255,136,0,0.2);">
-    
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-        <div style="background: #ff8800; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">⚠️</div>
-        <h3 style="color: #ff8800; margin: 0; font-size: 22px;">VOUS N'AVEZ PLUS LES PREUVES ?</h3>
-    </div>
-    
-    <p style="color: #ffcc88; margin-bottom: 15px; font-size: 14px;">
-        Pas de panique. Voici ce que vous pouvez faire <strong>même sans captures d'écran</strong> :
-    </p>
-    
-    <div style="background: #000000; border-radius: 15px; padding: 15px; margin: 15px 0; border-left: 4px solid #ff8800;">
-        <p style="color: #ffcc88; margin-bottom: 10px; font-size: 13px;">📋 <strong>CE QUE VOUS POUVEZ FAIRE :</strong></p>
-        <ul style="color: #cccccc; margin-left: 20px; font-size: 12px; line-height: 1.8;">
-            <li><strong>1️⃣ Signalez quand même sur Pharos</strong> → Décrivez les faits avec précision (dates, heures, mots exacts dont vous vous souvenez)</li>
-            <li><strong>2️⃣ Rassemblez des témoins</strong> → D'autres personnes dans le groupe ont peut-être encore les messages</li>
-            <li><strong>3️⃣ Si le harcèlement continue</strong> → Faites des captures d'écran <strong>immédiatement</strong> avant que l'autre personne ne les supprime</li>
-            <li><strong>4️⃣ Activez la sauvegarde automatique</strong> → WhatsApp sauvegarde vos messages sur Google Drive / iCloud</li>
-            <li><strong>5️⃣ Conservez une trace écrite</strong> → Notez les dates, heures et ce qui a été dit dans un document</li>
-        </ul>
-    </div>
-    
-    <div style="background: #1a0a00; border-radius: 10px; padding: 15px; margin: 15px 0;">
-        <p style="color: #ffcc88; font-size: 13px; margin-bottom: 5px;">💡 <strong>BON À SAVOIR :</strong></p>
-        <p style="color: #aaaaaa; font-size: 12px; line-height: 1.5;">
-            Même sans preuves, votre témoignage peut aider. Si plusieurs personnes signalent la même personne (même sans preuves), 
-            WhatsApp et Pharos peuvent recouper les informations et déclencher une enquête.
-        </p>
-    </div>
-    
-    <div style="background: #330000; border-radius: 10px; padding: 15px; margin: 15px 0; border: 1px solid #ff4444;">
-        <p style="color: #ff8888; font-size: 12px; margin-bottom: 5px;">🔴 <strong>CE QU'IL NE FAUT SURTOUT PAS FAIRE :</strong></p>
-        <ul style="color: #ffaaaa; margin-left: 20px; font-size: 11px; line-height: 1.6;">
-            <li>❌ <strong>N'inventez jamais de preuves</strong> (fausses captures d'écran)</li>
-            <li>❌ <strong>Ne modifiez pas</strong> de vraies captures d'écran</li>
-            <li>❌ <strong>N'accusez pas sans rien</strong> (perte de crédibilité)</li>
-        </ul>
-        <p style="color: #ff8888; font-size: 11px; margin-top: 10px;">
-            ⚠️ La <strong>dénonciation calomnieuse</strong> est punie par la loi (amende jusqu'à 45 000€ et 5 ans de prison).
-        </p>
-    </div>
-    
-    <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #663300; font-size: 11px; color: #aa7744; text-align: center;">
-        📱 <strong>Activez la sauvegarde WhatsApp maintenant</strong> : Paramètres → Chats → Sauvegarde des chats → Activer
-    </div>
-</div>
-
-<!-- ============================================ -->
-<!-- SECTION 3 : COMMENT BIEN CONSERVER SES PREUVES -->
-<!-- ============================================ -->
-<div class="tips-proofs" style="background: linear-gradient(135deg, #001a0a, #000a05); border: 2px solid #00aa66; border-radius: 20px; padding: 25px; margin: 30px 0; box-shadow: 0 0 15px rgba(0,170,102,0.2);">
-    
-    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
-        <div style="background: #00aa66; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">🛡️</div>
-        <h3 style="color: #00ffaa; margin: 0; font-size: 22px;">COMMENT CONSERVER VOS PREUVES</h3>
-    </div>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 15px 0;">
-        <div style="background: #0a1a10; border-radius: 10px; padding: 12px;">
-            <div style="font-size: 24px; margin-bottom: 5px;">📸</div>
-            <p style="color: #00ffaa; font-size: 13px; font-weight: bold;">Capture d'écran immédiate</p>
-            <p style="color: #aaaaaa; font-size: 11px;">Dès que vous voyez un message problématique, faites une capture.</p>
-        </div>
-        <div style="background: #0a1a10; border-radius: 10px; padding: 12px;">
-            <div style="font-size: 24px; margin-bottom: 5px;">☁️</div>
-            <p style="color: #00ffaa; font-size: 13px; font-weight: bold;">Sauvegarde automatique</p>
-            <p style="color: #aaaaaa; font-size: 11px;">Activez la sauvegarde WhatsApp sur Google Drive ou iCloud.</p>
-        </div>
-        <div style="background: #0a1a10; border-radius: 10px; padding: 12px;">
-            <div style="font-size: 24px; margin-bottom: 5px;">📁</div>
-            <p style="color: #00ffaa; font-size: 13px; font-weight: bold;">Dossier dédié</p>
-            <p style="color: #aaaaaa; font-size: 11px;">Rangez vos captures dans un dossier sécurisé (cloud ou disque dur).</p>
-        </div>
-        <div style="background: #0a1a10; border-radius: 10px; padding: 12px;">
-            <div style="font-size: 24px; margin-bottom: 5px;">📝</div>
-            <p style="color: #00ffaa; font-size: 13px; font-weight: bold;">Notez les détails</p>
-            <p style="color: #aaaaaa; font-size: 11px;">Dates, heures, mots-clés : tout est utile pour un signalement.</p>
-        </div>
-    </div>
-    
-    <div style="background: #0a1a10; border-radius: 10px; padding: 12px; margin-top: 10px;">
-        <p style="color: #00ffaa; font-size: 12px; margin-bottom: 5px;">🔧 <strong>ASTUCE SUPPLÉMENTAIRE :</strong></p>
-        <p style="color: #aaaaaa; font-size: 11px;">
-            Activez l'option <strong>"Conserver les messages supprimés"</strong> dans certaines applications de messagerie. 
-            Pour WhatsApp, malheureusement, cette option n'existe pas. La seule solution est la capture immédiate.
-        </p>
-    </div>
-</div>
-
-<script>
-// Fonction pour générer le message Pharos
-function genererMessagePharos() {
-    const message = `Je signale un cas de harcèlement sur WhatsApp.
-    
+        function genererMessage() {
+            const message = `Je signale un cas de harcèlement sur WhatsApp.
 Numéro du harceleur : [À COMPLÉTER]
 Description : [À COMPLÉTER]
 Dates : [À COMPLÉTER]
+Preuves disponibles : OUI / NON`;
+            document.getElementById('messageTexte').innerText = message;
+            document.getElementById('pharosMessage').style.display = 'block';
+        }
 
-Preuves disponibles (captures d'écran) : OUI / NON
-
-Je demande aux autorités de prendre les mesures nécessaires.`;
-
-    document.getElementById('messageTexte').innerText = message;
-    document.getElementById('pharosMessage').style.display = 'block';
-    document.getElementById('pharosMessage').scrollIntoView({ behavior: 'smooth' });
-}
-
-// Fonction pour copier le message
-function copierMessage() {
-    const texte = document.getElementById('messageTexte').innerText;
-    navigator.clipboard.writeText(texte);
-    alert("✅ Message copié ! Va sur Pharos et colle-le (Ctrl+V)");
-}
-</script>
+        function copierMessage() {
+            const texte = document.getElementById('messageTexte').innerText;
+            navigator.clipboard.writeText(texte);
+            alert("✅ Message copié !");
+        }
+    </script>
 </body>
 </html>
+JOYBOY
