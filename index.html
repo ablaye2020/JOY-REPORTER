@@ -58,7 +58,6 @@
             100% { transform: translateY(-100%); }
         }
 
-        /* Titre principal */
         h1 {
             text-align: center;
             font-size: 36px;
@@ -79,29 +78,6 @@
             margin-right: auto;
         }
 
-        /* Boutons musique */
-        .music-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .btn-music {
-            background: #660066;
-            color: #ff66ff;
-            border: 1px solid #ff66ff;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .btn-music:hover {
-            background: #990099;
-        }
-
-        /* Formulaire */
         input {
             width: 100%;
             padding: 14px;
@@ -148,7 +124,6 @@
             text-align: center;
         }
 
-        /* Footer */
         .footer {
             text-align: center;
             font-size: 10px;
@@ -165,7 +140,7 @@
 </head>
 <body>
     <div class="container">
-        <!-- Effet de scrolling (générique) -->
+        <!-- Effet de scrolling -->
         <div class="scrolling-text">
             <div class="scroll-content">
                 <p>⚔️ REDIX-KING ⚔️</p>
@@ -183,57 +158,49 @@
             <div class="subtitle">⚡ MASS REPORTER SYSTEM ⚡</div>
         </div>
 
-        <!-- Contrôle musique -->
-        <div class="music-buttons">
-            <button class="btn-music" onclick="jouerMusique()">🎵 JOUER</button>
-            <button class="btn-music" onclick="pauseMusique()">⏸️ PAUSE</button>
-        </div>
-
-        <!-- Champ numéro -->
         <input type="text" id="numero" placeholder="📞 NUMÉRO À SIGNALER (+33XXXXXXXXX)">
-
-        <!-- Bouton signalement -->
         <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
-
-        <!-- Statut -->
         <div id="status">⚡ PRÊT ⚡</div>
 
-        <!-- Footer -->
         <div class="footer">
             <span>by JOYBOY</span> | INFO PURGE 24 | "Le respect ne se demande pas"
         </div>
     </div>
 
     <script>
-        // MUSIQUE
+        // MUSIQUE AUTO (sans boutons)
         let musique = null;
+        let musiqueJouee = false;
 
-        function jouerMusique() {
+        function demarrerMusique() {
+            if (musiqueJouee) return;
             if (!musique) {
                 musique = new Audio('song.mp3.m4a');
                 musique.loop = true;
-                musique.volume = 0.5;
+                musique.volume = 0.4;
             }
-            musique.play().catch(e => console.log("Musique bloquée"));
+            musique.play().catch(e => {
+                console.log("Auto-play bloqué, la musique démarrera au clic");
+            });
+            musiqueJouee = true;
         }
 
-        function pauseMusique() {
-            if (musique) musique.pause();
-        }
+        // Démarrage automatique au chargement
+        window.addEventListener('load', demarrerMusique);
+        // Si le navigateur bloque l'auto-play, la musique démarre au premier clic
+        document.body.addEventListener('click', demarrerMusique, { once: true });
 
         // SIGNALEMENTS
         async function lancerSignalement() {
             const numero = document.getElementById('numero').value.trim();
-            
             if(!numero || numero.length < 10) {
-                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
+                alert("❌ Numéro invalide !");
                 return;
             }
 
             const statusDiv = document.getElementById('status');
-            const bouton = document.querySelector('button:not(.btn-music)');
-            
-            statusDiv.innerHTML = "⚡ ENVOI DE 50 SIGNALEMENTS EN PARALLÈLE... ⚡";
+            const bouton = document.querySelector('button');
+            statusDiv.innerHTML = "⚡ ENVOI DE 50 SIGNALEMENTS... ⚡";
             statusDiv.style.color = "#ffaa00";
             bouton.disabled = true;
 
@@ -252,7 +219,6 @@
 
             const resultats = await Promise.all(promesses);
             const reussis = resultats.filter(r => r === 'ok').length;
-            
             statusDiv.innerHTML = `✅ ${reussis}/50 SIGNALEMENTS ENVOYÉS ! ✅`;
             statusDiv.style.color = "#00ff00";
             bouton.disabled = false;
