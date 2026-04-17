@@ -4,8 +4,6 @@ const nodemailer = require('nodemailer');
 const comptesEmail = [
     { user: "bruneferno@gmail.com", pass: "lcux bbfw glcf msdc" },
     { user: "emperorredix@gmail.com", pass: "vjqk zekg lndc spbf" }
-    user: "loupgarou1012@gmail.com", pass: "jlle vzrb ywgf vfqr" },
-    { user: "redixmba@gmail.com", pass: "tffa ywyf krtu dtwd" }
 ];
 
 const emailsSupport = [
