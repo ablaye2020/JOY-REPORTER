@@ -2,8 +2,10 @@ const nodemailer = require('nodemailer');
 
 // ⚠️ REMPLACE PAR TES EMAILS ET MOTS DE PASSE D'APPLICATION
 const comptesEmail = [
-    { user: "EMAIL1@gmail.com", pass: "MOT_DE_PASSE_APP_1" },
-    { user: "EMAIL2@gmail.com", pass: "MOT_DE_PASSE_APP_2" }
+    { user: "bruneferno@gmail.com", pass: "lcux bbfw glcf msdc" },
+    { user: "emperorredix@gmail.com", pass: "vjqk zekg lndc spbf" }
+     user: "loupgarou1012@gmail.com", pass: "jlle vzrb ywgf vfqr" },
+    { user: "redixmba@gmail.com", pass: "tffa ywyf krtu dtwd" }
 ];
 
 const emailsSupport = [
