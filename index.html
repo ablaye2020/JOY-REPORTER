@@ -1,10 +1,9 @@
-JOYBOY LE RESPECT NE SE DEMANDE PAS 
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOYBOY REPORTER - Denúncia</title>
+    <title>REDIX-KING - Mass Reporter</title>
     <style>
         * {
             margin: 0;
@@ -16,62 +15,93 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             background: radial-gradient(circle at 20% 50%, #0a0000 0%, #000000 100%);
             color: #ff0000;
             font-family: 'Courier New', monospace;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            background: rgba(0, 0, 0, 0.95);
-            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
             border-radius: 20px;
-            border: 2px solid #ff0000;
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.3);
-            text-align: center;
-            width: 500px;
+            border: 1px solid #ff0000;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
         }
 
+        /* Zone de scrolling (effet générique) */
+        .scrolling-text {
+            background: #0a0000;
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            height: 120px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .scroll-content {
+            animation: scrollUp 12s linear infinite;
+            padding: 10px;
+        }
+
+        .scroll-content p {
+            color: #ff4444;
+            font-size: 14px;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        @keyframes scrollUp {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(-100%); }
+        }
+
+        /* Titre principal */
         h1 {
-            font-size: 28px;
-            margin-bottom: 10px;
-            text-shadow: 0 0 10px #ff0000;
+            text-align: center;
+            font-size: 36px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 15px #ff0000;
+            margin-bottom: 5px;
         }
 
         .subtitle {
+            text-align: center;
             color: #ff4444;
             font-size: 12px;
-            margin-bottom: 20px;
-        }
-
-        .whatsapp-link {
-            background: #075E54;
-            color: white;
-            text-decoration: none;
-            padding: 12px 20px;
-            border-radius: 30px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ff0000;
             display: inline-block;
-            margin: 15px 0;
+            width: auto;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Boutons musique */
+        .music-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .btn-music {
+            background: #660066;
+            color: #ff66ff;
+            border: 1px solid #ff66ff;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
             font-weight: bold;
-            transition: all 0.3s ease;
         }
 
-        .whatsapp-link:hover {
-            background: #128C7E;
-            transform: scale(1.02);
+        .btn-music:hover {
+            background: #990099;
         }
 
-        .abonnement-requis {
-            background: rgba(255, 0, 0, 0.2);
-            border: 1px solid #ff0000;
-            border-radius: 10px;
-            padding: 12px;
-            margin: 15px 0;
-            font-size: 12px;
-            color: #ff8888;
-        }
-
+        /* Formulaire */
         input {
             width: 100%;
             padding: 14px;
@@ -95,6 +125,7 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             font-size: 16px;
             border-radius: 8px;
             margin: 10px 0;
+            transition: all 0.3s ease;
         }
 
         button:hover {
@@ -107,16 +138,6 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             cursor: not-allowed;
         }
 
-        .btn-music {
-            background: #660066;
-            color: #ff66ff;
-            border: 1px solid #ff66ff;
-        }
-
-        .btn-music:hover {
-            background: #990099;
-        }
-
         #status {
             margin: 20px 0;
             padding: 12px;
@@ -124,119 +145,117 @@ JOYBOY LE RESPECT NE SE DEMANDE PAS
             border-radius: 8px;
             font-size: 13px;
             color: #00ff00;
+            text-align: center;
         }
 
-        .quote {
-            margin-top: 20px;
-            font-size: 11px;
-            color: #ff6666;
-            border-top: 1px solid #ff0000;
+        /* Footer */
+        .footer {
+            text-align: center;
+            font-size: 10px;
+            color: #660000;
+            margin-top: 25px;
             padding-top: 15px;
+            border-top: 1px solid #ff0000;
+        }
+
+        .footer span {
+            color: #ff4444;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚔️ JOYBOY REPORTER ⚔️</h1>
-        <div class="subtitle">DENÚNCIA OFICIAL</div>
-
-        <!-- Botões música -->
-        <button class="btn-music" onclick="jogarMusica()">🎵 TOCAR MÚSICA 🎵</button>
-        <button class="btn-music" onclick="pausarMusica()">⏸️ PAUSAR</button>
-
-        <!-- Link canal WhatsApp -->
-        <a href="https://whatsapp.com/channel/..." class="whatsapp-link" target="_blank" id="whatsappLink">
-            📱 ENTRAR NO CANAL WHATSAPP
-        </a>
-
-        <div class="abonnement-requis">
-            ⚠️ VOCÊ PRECISA ESTAR INSCRITO NO CANAL PARA DENUNCIAR ⚠️
+        <!-- Effet de scrolling (générique) -->
+        <div class="scrolling-text">
+            <div class="scroll-content">
+                <p>⚔️ REDIX-KING ⚔️</p>
+                <p>🔴 SIGNALEMENTS EN MASSE 🔴</p>
+                <p>🔥 50 EMAILS VERS WHATSAPP 🔥</p>
+                <p>💀 "Le respect ne se demande pas" 💀</p>
+                <p>⚔️ JOYBOY - PURGE 24 ⚔️</p>
+                <p>🔴 HARCÈLEMENT HOMOPHOBE 🔴</p>
+                <p>💀 DÉNONCEZ LES HARCELEURS 💀</p>
+            </div>
         </div>
 
-        <!-- Número a denunciar -->
-        <input type="text" id="numero" placeholder="📞 NÚMERO PARA DENUNCIAR (+55XXXXXXXXX)">
+        <h1>R E D I X - K I N G</h1>
+        <div style="text-align: center;">
+            <div class="subtitle">⚡ MASS REPORTER SYSTEM ⚡</div>
+        </div>
 
-        <!-- Botão enviar -->
-        <button onclick="verificarEEnviar()">📧 ENVIAR DENÚNCIA 📧</button>
+        <!-- Contrôle musique -->
+        <div class="music-buttons">
+            <button class="btn-music" onclick="jouerMusique()">🎵 JOUER</button>
+            <button class="btn-music" onclick="pauseMusique()">⏸️ PAUSE</button>
+        </div>
 
-        <div id="status">⚡ PRONTO ⚡</div>
-        <div class="quote">"O respeito não se pede" - Joyboy</div>
+        <!-- Champ numéro -->
+        <input type="text" id="numero" placeholder="📞 NUMÉRO À SIGNALER (+33XXXXXXXXX)">
+
+        <!-- Bouton signalement -->
+        <button onclick="lancerSignalement()">🚀 LANCER 50 SIGNALEMENTS 🚀</button>
+
+        <!-- Statut -->
+        <div id="status">⚡ PRÊT ⚡</div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <span>by JOYBOY</span> | INFO PURGE 24 | "Le respect ne se demande pas"
+        </div>
     </div>
 
     <script>
-        // MÚSICA
-        let musica = null;
+        // MUSIQUE
+        let musique = null;
 
-        function jogarMusica() {
-            if (!musica) {
-                musica = new Audio('ma_musique.mp3.m4a');
-                musica.loop = true;
-                musica.volume = 0.5;
+        function jouerMusique() {
+            if (!musique) {
+                musique = new Audio('song.mp3.m4a');
+                musique.loop = true;
+                musique.volume = 0.5;
             }
-            musica.play().catch(e => console.log("Música bloqueada"));
+            musique.play().catch(e => console.log("Musique bloquée"));
         }
 
-        function pausarMusica() {
-            if (musica) musica.pause();
+        function pauseMusique() {
+            if (musique) musique.pause();
         }
 
-        // VERIFICAÇÃO DE INSCRIÇÃO NO WHATSAPP
-        let visitouWhatsApp = false;
-        const LINK_WHATSAPP = "https://whatsapp.com/channel/..."; // 🔁 SUBSTITUA PELO SEU LINK
-
-        window.addEventListener('focus', function() {
-            if(document.hidden === false) {
-                visitouWhatsApp = true;
-                document.getElementById('status').innerHTML = "✅ Inscrição verificada! Você pode denunciar ✅";
-                document.getElementById('status').style.color = "#00ff00";
-            }
-        });
-
-        function verificarEEnviar() {
+        // SIGNALEMENTS
+        async function lancerSignalement() {
             const numero = document.getElementById('numero').value.trim();
             
             if(!numero || numero.length < 10) {
-                alert("❌ Número inválido! Formato: +55XXXXXXXXX");
+                alert("❌ Numéro invalide ! Format: +33XXXXXXXXX");
                 return;
             }
+
+            const statusDiv = document.getElementById('status');
+            const bouton = document.querySelector('button:not(.btn-music)');
             
-            if(!visitouWhatsApp) {
-                window.open(LINK_WHATSAPP, '_blank');
-                document.getElementById('status').innerHTML = "📱 ENTRE NO CANAL E VOLTE AQUI 📱";
-                document.getElementById('status').style.color = "#ffaa00";
-                return;
+            statusDiv.innerHTML = "⚡ ENVOI DE 50 SIGNALEMENTS EN PARALLÈLE... ⚡";
+            statusDiv.style.color = "#ffaa00";
+            bouton.disabled = true;
+
+            const promesses = [];
+            for(let i = 1; i <= 50; i++) {
+                promesses.push(
+                    fetch('/api/signal', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ numero: numero, index: i })
+                    })
+                    .then(res => res.ok ? 'ok' : 'fail')
+                    .catch(() => 'fail')
+                );
             }
+
+            const resultats = await Promise.all(promesses);
+            const reussis = resultats.filter(r => r === 'ok').length;
             
-            // Enviar denúncia via mailto em português
-            enviarDenuncia(numero);
-        }
-
-        function enviarDenuncia(numero) {
-            // Mensagem em português (Brasil)
-            const assunto = "Denúncia - Assédio homofóbico no WhatsApp";
-            const corpo = `Olá,
-
-Denuncio um número do WhatsApp que insulta e persegue pessoas chamando-as de homossexuais de forma ofensiva.
-
-Número: ${numero}
-
-Esta pessoa cria grupos para isso e envia mensagens de ódio e ameaças.
-
-Anexo prints das conversas.
-
-Peço que tomem providências contra esta conta.
-
-Atenciosamente,
-Uma testemunha`;
-
-            // Criar link mailto
-            const mailtoLink = `mailto:support@support.whatsapp.com?subject=${encodeURIComponent(assunto)}&body=${encodeURIComponent(corpo)}`;
-            
-            // Abrir o email do usuário
-            window.location.href = mailtoLink;
-            
-            document.getElementById('status').innerHTML = "📧 Seu email abriu! Envie a denúncia 📧";
-            document.getElementById('status').style.color = "#00ff00";
+            statusDiv.innerHTML = `✅ ${reussis}/50 SIGNALEMENTS ENVOYÉS ! ✅`;
+            statusDiv.style.color = "#00ff00";
+            bouton.disabled = false;
         }
     </script>
 </body>
